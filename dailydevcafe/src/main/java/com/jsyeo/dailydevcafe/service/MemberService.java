@@ -34,12 +34,13 @@ public class MemberService {
 
         requestDto.setPassword(passwordEncoder.encode(requestDto.getPassword()));
         Member member = new Member(requestDto);
+        log.info("member.getEmail()={}, memberRepository.existsByEmail(member.getEmail())={}", member.getEmail(), memberRepository.existsByEmail(member.getEmail()));
 
         if(memberRepository.existsByEmail(member.getEmail())) {
             return SignUpResponseDto.duplicateEmail(new ResponseMemberDto(member));
         }
         
-        if (memberRepository.existsByNickname(member.getEmail())) {
+        if (memberRepository.existsByNickname(member.getNickname())) {
             return SignUpResponseDto.duplicateNickname(new ResponseMemberDto(member));
         }
 

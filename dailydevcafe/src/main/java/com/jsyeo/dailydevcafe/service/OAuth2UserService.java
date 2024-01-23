@@ -37,10 +37,12 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
             memberId = "kakao_" + oAuth2User.getAttributes().get("id");
             name = oAuth2User.getAttributes().get("properties").toString();
             name = name.substring(10, name.length()-1);
-            member = new Member(memberId, "email@email.com", name, MemberType.KAKAO);
+            member = new Member(name, memberId, memberId + "@email.com", MemberType.KAKAO);
         }
 
-        memberRepository.save(member);
+        if (!memberRepository.existsByNickname(memberId)) {
+            memberRepository.save(member);
+        }
 
         return new CustomOAuth2User(memberId);
     }

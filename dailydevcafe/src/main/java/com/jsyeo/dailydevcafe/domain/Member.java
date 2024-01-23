@@ -4,9 +4,7 @@ import com.jsyeo.dailydevcafe.dto.request.SignUpRequestDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.beans.factory.annotation.Value;
 
 @Entity
 @Getter
@@ -23,9 +21,11 @@ public class Member {
     private String name;
 
     @NotEmpty
+    @Column(unique = true)
     private String nickname;
 
     @NotEmpty
+    @Column(unique = true)
     private String email;
 
     @NotEmpty
@@ -41,10 +41,9 @@ public class Member {
         this.password = dto.getPassword();
     }
 
-    public Member(String id, String email, String name, MemberType type) {
-        this.id = id;
+    public Member(String name, String nickname, String email, MemberType type) {
         this.name = name;
-        this.nickname = id;
+        this.nickname = nickname;
         this.email = email;
         this.password = "Pa$sw0rd";
         this.type = type;
