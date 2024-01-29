@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ResponseMemberDto {
 
-    private String id;
+    private Long id;
     private String name;
     private String email;
     private String nickname;

@@ -13,10 +13,9 @@ import org.hibernate.annotations.GenericGenerator;
 public class Member {
 
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @GeneratedValue
     @Column(name = "member_id")
-    private String id;
+    private Long id;
 
     @NotBlank
     private String name;
