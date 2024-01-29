@@ -1,9 +1,6 @@
-package com.jsyeo.dailydevcafe.handler;
+package com.jsyeo.dailydevcafe.oauth;
 
-import com.jsyeo.dailydevcafe.domain.CustomOAuth2User;
 import com.jsyeo.dailydevcafe.security.JwtProvider;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

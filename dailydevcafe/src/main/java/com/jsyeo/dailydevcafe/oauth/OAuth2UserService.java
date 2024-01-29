@@ -1,6 +1,5 @@
-package com.jsyeo.dailydevcafe.service;
+package com.jsyeo.dailydevcafe.oauth;
 
-import com.jsyeo.dailydevcafe.domain.CustomOAuth2User;
 import com.jsyeo.dailydevcafe.domain.member.Member;
 import com.jsyeo.dailydevcafe.domain.member.MemberType;
 import com.jsyeo.dailydevcafe.repository.MemberRepository;

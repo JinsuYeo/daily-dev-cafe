@@ -1,6 +1,6 @@
 package com.jsyeo.dailydevcafe.dto.response;
 
-import com.jsyeo.dailydevcafe.domain.Member;
+import com.jsyeo.dailydevcafe.domain.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

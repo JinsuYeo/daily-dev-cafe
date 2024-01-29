@@ -1,4 +1,4 @@
-package com.jsyeo.dailydevcafe.domain;
+package com.jsyeo.dailydevcafe.oauth;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

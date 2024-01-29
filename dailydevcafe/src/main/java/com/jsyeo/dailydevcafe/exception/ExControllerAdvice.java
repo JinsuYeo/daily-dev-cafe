@@ -1,11 +1,9 @@
-package com.jsyeo.dailydevcafe.handler;
+package com.jsyeo.dailydevcafe.exception;
 
 import com.jsyeo.dailydevcafe.dto.response.ResponseDto;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

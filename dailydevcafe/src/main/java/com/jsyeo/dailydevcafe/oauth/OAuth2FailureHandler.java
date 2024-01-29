@@ -1,4 +1,4 @@
-package com.jsyeo.dailydevcafe.handler;
+package com.jsyeo.dailydevcafe.oauth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jsyeo.dailydevcafe.dto.response.ResponseDto;

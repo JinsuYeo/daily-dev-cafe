@@ -7,17 +7,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
 
 @Slf4j
-@Transactional
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class MemberApiControllerTest extends ApiTest{
 
     @Test
-    @Order(1)
     void signUpTest() {
         ExtractableResponse<Response> response = memberSignUpRequest();
 
@@ -25,8 +21,8 @@ class MemberApiControllerTest extends ApiTest{
     }
 
     @Test
-    @Order(2)
     void signInTest() {
+        memberSignUpRequest();
         ExtractableResponse<Response> response = memberSignInRequest();
 
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
@@ -60,6 +56,4 @@ class MemberApiControllerTest extends ApiTest{
                 .then()
                 .log().all().extract();
     }
-
-
 }

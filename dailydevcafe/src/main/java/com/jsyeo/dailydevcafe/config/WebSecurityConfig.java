@@ -1,7 +1,7 @@
 package com.jsyeo.dailydevcafe.config;
 
-import com.jsyeo.dailydevcafe.handler.OAuth2FailureHandler;
-import com.jsyeo.dailydevcafe.handler.OAuth2SuccessHandler;
+import com.jsyeo.dailydevcafe.oauth.OAuth2FailureHandler;
+import com.jsyeo.dailydevcafe.oauth.OAuth2SuccessHandler;
 import com.jsyeo.dailydevcafe.security.FailedAuthenticationEntryPoint;
 import com.jsyeo.dailydevcafe.security.JwtAuthenticationalFilter;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
-import org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.web.SecurityFilterChain;

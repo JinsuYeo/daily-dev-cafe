@@ -1,7 +1,8 @@
-package com.jsyeo.dailydevcafe.domain;
+package com.jsyeo.dailydevcafe.domain.member;
 
 import com.jsyeo.dailydevcafe.dto.request.SignUpRequestDto;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -17,18 +18,18 @@ public class Member {
     @Column(name = "member_id")
     private String id;
 
-    @NotEmpty
+    @NotBlank
     private String name;
 
-    @NotEmpty
+    @NotBlank
     @Column(unique = true)
     private String nickname;
 
-    @NotEmpty
+    @NotBlank
     @Column(unique = true)
     private String email;
 
-    @NotEmpty
+    @NotBlank
     private String password;
 
     @Enumerated(EnumType.STRING)

@@ -1,6 +1,6 @@
 package com.jsyeo.dailydevcafe.service;
 
-import com.jsyeo.dailydevcafe.domain.Member;
+import com.jsyeo.dailydevcafe.domain.member.Member;
 import com.jsyeo.dailydevcafe.dto.MemberDto;
 import com.jsyeo.dailydevcafe.dto.request.SignInRequestDto;
 import com.jsyeo.dailydevcafe.dto.request.SignUpRequestDto;
