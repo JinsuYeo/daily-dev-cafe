@@ -15,6 +15,7 @@ import java.io.IOException;
 public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final JwtProvider jwtProvider;
+    private final String API_BASE_URL = "http://localhost:3000";
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
@@ -26,6 +27,6 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String memberId = oAuth2User.getName();
         String token = jwtProvider.create(memberId);
 
-        response.sendRedirect("http://localhost:8080/auth/oauth-response/" + token + "/3600");
+        response.sendRedirect(API_BASE_URL + "/auth/oauth-response/" + token + "/3600");
     }
 }

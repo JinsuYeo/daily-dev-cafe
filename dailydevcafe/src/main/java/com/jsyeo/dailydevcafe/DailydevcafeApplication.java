@@ -10,4 +10,5 @@ public class DailydevcafeApplication {
 		SpringApplication.run(DailydevcafeApplication.class, args);
 	}
 
+
 }
