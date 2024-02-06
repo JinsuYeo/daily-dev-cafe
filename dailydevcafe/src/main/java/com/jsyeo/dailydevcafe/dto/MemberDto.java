@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 public class MemberDto {
 
@@ -15,11 +16,9 @@ public class MemberDto {
     private String nickname;
 
     public MemberDto(Member member) {
-        if (member != null) {
-            this.id = member.getId();
-            this.name = member.getName();
-            this.email = member.getEmail();
-            this.nickname = member.getNickname();
-        }
+        this.id = member.getId();
+        this.name = member.getName();
+        this.email = member.getEmail();
+        this.nickname = member.getNickname();
     }
 }

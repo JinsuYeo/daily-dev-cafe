@@ -31,7 +31,7 @@ public class PostService {
             return PublishPostResponseDto.notExistUser();
         }
 
-        Member findMember = memberRepository.findByEmail(email);
+        Member findMember = memberRepository.findByEmail(email).orElse(new Member());
         Post post = new Post(requestDto, findMember);
         postRepository.save(post);
 

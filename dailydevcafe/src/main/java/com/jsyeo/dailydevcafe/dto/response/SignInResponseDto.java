@@ -21,7 +21,7 @@ public class SignInResponseDto extends ResponseDto {
         return new SignInResponseDto(HttpStatus.OK.value(), "로그인 성공", dto, token);
     }
 
-    public static ResponseDto fail(MemberDto dto) {
-        return new ResponseDto(HttpStatus.BAD_REQUEST.value(), "로그인 정보가 일치하지 않습니다.", dto);
+    public static ResponseDto fail() {
+        return new ResponseDto(HttpStatus.BAD_REQUEST.value(), "로그인 정보가 일치하지 않습니다.", null);
     }
 }

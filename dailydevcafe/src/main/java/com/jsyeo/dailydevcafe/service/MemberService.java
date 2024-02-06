@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -33,14 +34,15 @@ public class MemberService {
 
         requestDto.setPassword(passwordEncoder.encode(requestDto.getPassword()));
         Member member = new Member(requestDto);
-        log.info("member.getEmail()={}, memberRepository.existsByEmail(member.getEmail())={}", member.getEmail(), memberRepository.existsByEmail(member.getEmail()));
+        Optional<Member> findMember = memberRepository.findByEmail(member.getEmail());
 
-        if(memberRepository.existsByEmail(member.getEmail())) {
-            return SignUpResponseDto.duplicateEmail(new MemberDto(member));
+        if(findMember.isPresent()) {
+            return SignUpResponseDto.duplicateEmail();
         }
-        
-        if (memberRepository.existsByNickname(member.getNickname())) {
-            return SignUpResponseDto.duplicateNickname(new MemberDto(member));
+
+        findMember = memberRepository.findByNickname(member.getNickname());
+        if (findMember.isPresent()) {
+            return SignUpResponseDto.duplicateNickname();
         }
 
         memberRepository.save(member);
@@ -52,14 +54,14 @@ public class MemberService {
     public ResponseDto<? extends MemberDto> signIn(SignInRequestDto requestDto) {
 
         String email = requestDto.getEmail();
-        Member findMember = memberRepository.findByEmail(email);
+        Optional<Member> findMember = memberRepository.findByEmail(email);
 
-        if (findMember == null
-                || !passwordEncoder.matches(requestDto.getPassword(), findMember.getPassword())) {
-            return SignInResponseDto.fail(new MemberDto(findMember));
+        if (findMember.isEmpty()
+                || !passwordEncoder.matches(requestDto.getPassword(), findMember.get().getPassword())) {
+            return SignInResponseDto.fail();
         }
 
-        return SignInResponseDto.success(new MemberDto(findMember), jwtProvider.create(email));
+        return SignInResponseDto.success(new MemberDto(findMember.get()), jwtProvider.create(email));
     }
 
     public List<Member> findMembers() {
