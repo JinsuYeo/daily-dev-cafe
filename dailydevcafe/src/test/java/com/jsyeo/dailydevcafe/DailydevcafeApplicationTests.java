@@ -8,6 +8,7 @@ class DailydevcafeApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

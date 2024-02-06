@@ -1,5 +1,6 @@
 package com.jsyeo.dailydevcafe.api;
 
+import com.jsyeo.dailydevcafe.AcceptanceTestExecutionListener;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.context.SpringBootTest;
