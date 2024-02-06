@@ -1,6 +1,7 @@
 package com.jsyeo.dailydevcafe.api;
 
 import com.jsyeo.dailydevcafe.dto.request.PublishPostRequestDto;
+import com.jsyeo.dailydevcafe.dto.response.DeletePostResponseDto;
 import com.jsyeo.dailydevcafe.dto.response.GetPostResponseDto;
 import com.jsyeo.dailydevcafe.dto.response.PublishPostResponseDto;
 import com.jsyeo.dailydevcafe.dto.response.ResponseDto;
@@ -28,14 +29,21 @@ public class PostApiController {
     public ResponseEntity<? super PublishPostResponseDto> publishPost(@AuthenticationPrincipal String email,
                                                                       @RequestBody @Valid PublishPostRequestDto publishPostRequestDto) {
 
-        ResponseDto responseDto = postService.publishPost(email, publishPostRequestDto);
+        ResponseDto responseDto = postService.publish(email, publishPostRequestDto);
         return ResponseEntity.status(responseDto.getCode()).body(responseDto);
     }
 
     @GetMapping("/posts/{id}")
     public ResponseEntity<? super GetPostResponseDto> getPost(@PathVariable("id") @NotNull Long postId) {
 
-        ResponseDto responseDto = postService.getPost(postId);
+        ResponseDto responseDto = postService.get(postId);
+        return ResponseEntity.status(responseDto.getCode()).body(responseDto);
+    }
+
+    @DeleteMapping("/posts/{id}")
+    public ResponseEntity<? super DeletePostResponseDto> deletePost(@PathVariable("id") @NotNull Long postId) {
+
+        ResponseDto responseDto = postService.delete(postId);
         return ResponseEntity.status(responseDto.getCode()).body(responseDto);
     }
 }

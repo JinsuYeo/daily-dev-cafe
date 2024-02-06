@@ -13,6 +13,7 @@ public class PostDto {
 
     private Long id;
     private String title;
+    private String content;
     private String category;
     private String nickname;
     private LocalDateTime postDate;
@@ -23,6 +24,7 @@ public class PostDto {
     public PostDto(Post post) {
         this.id = post.getId();
         this.title = post.getTitle();
+        this.content = post.getContent();
         this.category = post.getCategory();
         this.nickname = post.getMember().getNickname();
         this.postDate = post.getPostDate();

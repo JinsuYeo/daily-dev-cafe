@@ -5,6 +5,7 @@ import com.jsyeo.dailydevcafe.domain.member.Member;
 import com.jsyeo.dailydevcafe.dto.PostDto;
 import com.jsyeo.dailydevcafe.dto.request.PublishPostRequestDto;
 import com.jsyeo.dailydevcafe.dto.response.GetPostResponseDto;
+import com.jsyeo.dailydevcafe.dto.response.DeletePostResponseDto;
 import com.jsyeo.dailydevcafe.dto.response.PublishPostResponseDto;
 import com.jsyeo.dailydevcafe.dto.response.ResponseDto;
 import com.jsyeo.dailydevcafe.repository.MemberRepository;
@@ -22,7 +23,7 @@ public class PostService {
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
 
-    public ResponseDto<? super PostDto> publishPost(String email,
+    public ResponseDto<? super PostDto> publish(String email,
                                                     PublishPostRequestDto requestDto) {
 
         if (!StringUtils.hasText(email) || !memberRepository.existsByEmail(email
@@ -38,7 +39,7 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseDto<? super PostDto> getPost(Long postId) {
+    public ResponseDto<? super PostDto> get(Long postId) {
 
         if (!postRepository.existsById(postId)) {
             return GetPostResponseDto.notExistPost();
@@ -46,5 +47,15 @@ public class PostService {
 
         Post findPost = postRepository.findById(postId).orElseThrow();
         return GetPostResponseDto.success(new PostDto(findPost));
+    }
+
+    public ResponseDto<? super Long> delete(Long postId) {
+
+        if (!postRepository.existsById(postId)) {
+            return DeletePostResponseDto.notExistPost(postId);
+        }
+
+        postRepository.deleteById(postId);
+        return DeletePostResponseDto.success(postId);
     }
 }
