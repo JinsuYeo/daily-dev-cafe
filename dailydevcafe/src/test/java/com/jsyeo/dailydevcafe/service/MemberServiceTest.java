@@ -34,12 +34,12 @@ class MemberServiceTest extends ServiceTest {
         // 중복 오류
         requestDto.setEmail("test2@test.com");
         ResponseDto responseDtoNicknameDuplicated = memberService.signUp(requestDto);
-        assertThat(responseDtoNicknameDuplicated.getMessage()).isEqualTo(SignUpResponseDto.duplicateNickname(new MemberDto()).getMessage());
+        assertThat(responseDtoNicknameDuplicated.getMessage()).isEqualTo(SignUpResponseDto.duplicateNickname().getMessage());
 
         requestDto.setEmail("test@test.com");
         requestDto.setNickname("test2");
         ResponseDto responseDtoEmailDuplicated = memberService.signUp(requestDto);
-        assertThat(responseDtoEmailDuplicated.getMessage()).isEqualTo(SignUpResponseDto.duplicateEmail(new MemberDto()).getMessage());
+        assertThat(responseDtoEmailDuplicated.getMessage()).isEqualTo(SignUpResponseDto.duplicateEmail().getMessage());
     }
 
     @Test
@@ -60,13 +60,13 @@ class MemberServiceTest extends ServiceTest {
         ResponseDto invalidEmailResponseDto = memberService.signIn(invalidEmailRequestDto);
 
         assertThat(invalidEmailResponseDto.getCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
-        assertThat(invalidEmailResponseDto.getMessage()).isEqualTo(SignInResponseDto.fail(new MemberDto()).getMessage());
+        assertThat(invalidEmailResponseDto.getMessage()).isEqualTo(SignInResponseDto.fail().getMessage());
 
         SignInRequestDto invalidPasswordRequestDto = createSignInRequestDto("test@test.com", "Pas$w0rd");
         ResponseDto invalidPasswordResponseDto = memberService.signIn(invalidPasswordRequestDto);
 
         assertThat(invalidPasswordResponseDto.getCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
-        assertThat(invalidPasswordResponseDto.getMessage()).isEqualTo(SignInResponseDto.fail(new MemberDto()).getMessage());
+        assertThat(invalidPasswordResponseDto.getMessage()).isEqualTo(SignInResponseDto.fail().getMessage());
     }
 
 }
