@@ -113,10 +113,10 @@ include::{snippets}/publishPost/request-fields.adoc[]
 
 === Reponse Fields
 
-==== 성공
+==== 저장 성공
 include::{snippets}/publishPost/response-fields.adoc[]
 
-==== 실패
+==== 저장 실패
 include::{snippets}/publishPostfail/response-fields.adoc[]
 
 === Request Body
@@ -125,10 +125,10 @@ include::{snippets}/publishPost/request-body.adoc[]
 
 === Reponse Body
 
-==== 성공
+==== 저장 성공
 include::{snippets}/publishPost/response-body.adoc[]
 
-==== 실패
+==== 저장 실패
 include::{snippets}/publishPostfail/response-body.adoc[]
 
 ***
@@ -141,7 +141,11 @@ include::{snippets}/getPost/http-request.adoc[]
 
 === Http Response
 
+==== 조회 성공
 include::{snippets}/getPost/http-response.adoc[]
+
+==== 조회 실패
+include::{snippets}/getPostFail/http-response.adoc[]
 
 === Path Parameters
 
@@ -149,8 +153,110 @@ include::{snippets}/getPost/path-parameters.adoc[]
 
 === Reponse Fields
 
+==== 조회 성공
 include::{snippets}/getPost/response-fields.adoc[]
+
+==== 조회 실패
+include::{snippets}/getPostFail/response-fields.adoc[]
 
 === Reponse Body
 
+==== 조회 성공
 include::{snippets}/getPost/response-body.adoc[]
+
+==== 조회 실패
+include::{snippets}/getPostFail/response-body.adoc[]
+
+== 게시글 삭제
+
+=== Http Request
+
+include::{snippets}/deletePost/http-request.adoc[]
+
+=== Http Response
+
+==== 조회 성공
+include::{snippets}/deletePost/http-response.adoc[]
+
+==== 조회 실패
+include::{snippets}/deletePostFail/http-response.adoc[]
+
+=== Path Parameters
+
+include::{snippets}/deletePost/path-parameters.adoc[]
+
+=== Reponse Fields
+
+==== 조회 성공
+include::{snippets}/deletePost/response-fields.adoc[]
+
+==== 조회 실패
+include::{snippets}/deletePostFail/response-fields.adoc[]
+
+=== Reponse Body
+
+==== 조회 성공
+include::{snippets}/deletePost/response-body.adoc[]
+
+==== 조회 실패
+include::{snippets}/deletePostFail/response-body.adoc[]
+
+== 게시글 수정
+
+=== Http Request
+
+include::{snippets}/patchPost/http-request.adoc[]
+
+=== Http Response
+
+==== 게시글 수정 성공
+include::{snippets}/patchPost/http-response.adoc[]
+
+==== 게시글 수정 실패 - 존재하지 않는 이메일
+include::{snippets}/patchPostNotExistMember/http-response.adoc[]
+
+==== 게시글 수정 실패 - 존재하지 않는 게시글
+include::{snippets}/patchPostnotExistPost/http-response.adoc[]
+
+==== 게시글 수정 실패 - 게시글 수정 권한 없음
+include::{snippets}/patchPostnotMatchedMember/http-response.adoc[]
+
+=== Path Parameters
+
+include::{snippets}/patchPost/path-parameters.adoc[]
+
+=== Request Fields
+
+include::{snippets}/patchPost/request-fields.adoc[]
+
+=== Reponse Fields
+
+==== 게시글 수정 성공
+include::{snippets}/patchPost/response-fields.adoc[]
+
+==== 게시글 수정 실패 - 존재하지 않는 이메일
+include::{snippets}/patchPostNotExistMember/response-fields.adoc[]
+
+==== 게시글 수정 실패 - 존재하지 않는 게시글
+include::{snippets}/patchPostnotExistPost/response-fields.adoc[]
+
+==== 게시글 수정 실패 - 게시글 수정 권한 없음
+include::{snippets}/patchPostnotMatchedMember/response-fields.adoc[]
+
+=== Request Body
+
+include::{snippets}/patchPost/request-body.adoc[]
+
+=== Reponse Body
+
+==== 게시글 수정 성공
+include::{snippets}/patchPost/response-body.adoc[]
+
+==== 게시글 수정 실패 - 존재하지 않는 이메일
+include::{snippets}/patchPostNotExistMember/response-body.adoc[]
+
+==== 게시글 수정 실패 - 존재하지 않는 게시글
+include::{snippets}/patchPostnotExistPost/response-body.adoc[]
+
+==== 게시글 수정 실패 - 게시글 수정 권한 없음
+include::{snippets}/patchPostnotMatchedMember/response-body.adoc[]

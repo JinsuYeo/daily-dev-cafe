@@ -15,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
-import org.springframework.restdocs.payload.PayloadDocumentation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +31,8 @@ import static org.springframework.restdocs.restassured.RestAssuredRestDocumentat
 @RequiredArgsConstructor
 public class PostApiControllerTest extends ApiTest {
 
+    private final String TEST_EMAIL = "test@test.com";
+
     @Autowired
     private MemberRepository memberRepository;
     @Autowired
@@ -42,7 +42,7 @@ public class PostApiControllerTest extends ApiTest {
 
     @BeforeEach
     void init() {
-        bearerToken = jwtProvider.create("test@test.com");
+        bearerToken = jwtProvider.create(TEST_EMAIL);
 
         requestData.put("title", "Test Title");
         requestData.put("content", "Publish Post Test");
@@ -76,20 +76,7 @@ public class PostApiControllerTest extends ApiTest {
     void getPost_successTest() {
 
         signUp();
-        Map<String, Object> postData = RestAssured.given()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .header("Authorization",
-                        "Bearer " + bearerToken,
-                        "Content-Type",
-                        ContentType.JSON,
-                        "Accept",
-                        ContentType.JSON)
-                .body(requestData)
-                .when()
-                .post("/post")
-                .then()
-                .extract().body().jsonPath().get("data");
-        String postId = postData.get("id").toString();
+        String postId = publishPost();
 
         ExtractableResponse<Response> response = getPost_success(postId);
 
@@ -108,16 +95,121 @@ public class PostApiControllerTest extends ApiTest {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
     }
 
+    @Test
+    void deletePost_successTest() {
+
+        signUp();
+        String postId = publishPost();
+
+        ExtractableResponse<Response> response = deletePostRequest_success(postId);
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat((Integer) response.body().jsonPath().get("data")).isEqualTo(Integer.parseInt(postId));
+    }
+
+    @Test
+    void deletePost_failTest() {
+        signUp();
+
+        ExtractableResponse<Response> response = deletePostRequest_fail("0");
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+        assertThat((Integer) response.body().jsonPath().get("data")).isEqualTo(0);
+    }
+
+    @Test
+    void patchPost_successTest() {
+        signUp();
+        String postId = publishPost();
+
+        ExtractableResponse<Response> response = patchPostRequest_success(postId);
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+
+        Map<String, Object> responseData = response.body().jsonPath().get("data");
+        assertThat(responseData.get("title")).isEqualTo("Test Title");
+        assertThat(responseData.get("category")).isEqualTo("Test Category");
+    }
+
+    @Test
+    void patchPost_notExistMemberTest() {
+
+        signUp();
+        publishPost();
+
+        ExtractableResponse<Response> response = patchPostRequest_notExistMember("0");
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.FORBIDDEN.value());
+    }
+
+    @Test
+    void patchPost_notExistPostTest() {
+
+        signUp();
+        String postId = "0";
+
+        ExtractableResponse<Response> response = patchPostRequest_notExistPost(postId);
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
+    void patchPost_notMatchedMemberTest() {
+
+        signUp();
+        signUp("test2@test.com", "testNickname2");
+        String token = jwtProvider.create("test2@test.com");
+        String postId = publishPost(token);
+
+        ExtractableResponse<Response> response = patchPostRequest_notMatchedMember(postId);
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+    }
+
+    //== RestAssured ==//
+
     private void signUp() {
         SignUpRequestDto dto = new SignUpRequestDto();
         dto.setName("memberA");
-        dto.setEmail("test@test.com");
+        dto.setEmail(TEST_EMAIL);
         dto.setNickname("testNickname");
         dto.setPassword("Pa$sw0rd");
         dto.setAgreedPersonal(true);
 
         Member member = new Member(dto);
         memberRepository.save(member);
+    }
+
+    private void signUp(String email, String nickname) {
+        SignUpRequestDto dto = new SignUpRequestDto();
+        dto.setName("memberA");
+        dto.setEmail(email);
+        dto.setNickname(nickname);
+        dto.setPassword("Pa$sw0rd");
+        dto.setAgreedPersonal(true);
+
+        Member member = new Member(dto);
+        memberRepository.save(member);
+    }
+
+    private String publishPost() {
+        Map<String, Object> postData = RestAssured.given()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .header("Authorization",
+                        "Bearer " + bearerToken)
+                .body(requestData)
+                .when()
+                .post("/post")
+                .then()
+                .extract().body().jsonPath().get("data");
+        return postData.get("id").toString();
+    }
+
+    private String publishPost(String token) {
+        Map<String, Object> postData = RestAssured.given()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .header("Authorization",
+                        "Bearer " + token)
+                .body(requestData)
+                .when()
+                .post("/post")
+                .then()
+                .extract().body().jsonPath().get("data");
+        return postData.get("id").toString();
     }
 
     private ExtractableResponse<Response> publishPostRequest_success(String path) {
@@ -151,11 +243,7 @@ public class PostApiControllerTest extends ApiTest {
                         ))).log().all()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .header("Authorization",
-                        "Bearer " + bearerToken,
-                        "Content-Type",
-                        ContentType.JSON,
-                        "Accept",
-                        ContentType.JSON)
+                        "Bearer " + bearerToken)
                 .body(requestData)
                 .when()
                 .post(path)
@@ -186,11 +274,7 @@ public class PostApiControllerTest extends ApiTest {
                         ))).log().all()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .header("Authorization",
-                        "Bearer " + bearerToken,
-                        "Content-Type",
-                        ContentType.JSON,
-                        "Accept",
-                        ContentType.JSON)
+                        "Bearer " + bearerToken)
                 .body(requestData)
                 .when()
                 .post(path)
@@ -235,7 +319,7 @@ public class PostApiControllerTest extends ApiTest {
     private ExtractableResponse<Response> getPost_fail(String postId) {
         return RestAssured.given(this.documentationSpec
                         .accept("application/json")
-                        .filter(document("getPost",
+                        .filter(document("getPostFail",
                                 preprocessRequest(modifyUris()
                                                 .scheme("http")
                                                 .host("localhost")
@@ -257,5 +341,177 @@ public class PostApiControllerTest extends ApiTest {
                 .get("/posts/{postId}", postId)
                 .then()
                 .log().all().extract();
+    }
+
+    private ExtractableResponse<Response> deletePostRequest_success(String postId) {
+        return RestAssured.given(this.documentationSpec
+                        .accept("application/json")
+                        .filter(document("deletePost",
+                                preprocessRequest(modifyUris()
+                                                .scheme("http")
+                                                .host("localhost")
+                                                .removePort(),
+                                        prettyPrint()),
+                                preprocessResponse(prettyPrint()),
+                                responseFields(
+                                        fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
+                                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
+                                        fieldWithPath("data").type(JsonFieldType.NUMBER).description("삭제된 게시글 아이디")
+                                ),
+                                pathParameters(
+                                        parameterWithName("postId").description("게시글 아이디")
+                                )
+                        ))).log().all()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .header("Authorization",
+                        "Bearer " + bearerToken)
+                .when()
+                .delete("/posts/{postId}", postId)
+                .then()
+                .log().all().extract();
+    }
+
+    private ExtractableResponse<Response> deletePostRequest_fail(String postId) {
+        return RestAssured.given(this.documentationSpec
+                        .accept("application/json")
+                        .filter(document("deletePostFail",
+                                preprocessRequest(modifyUris()
+                                                .scheme("http")
+                                                .host("localhost")
+                                                .removePort(),
+                                        prettyPrint()),
+                                preprocessResponse(prettyPrint()),
+                                responseFields(
+                                        fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
+                                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
+                                        fieldWithPath("data").type(JsonFieldType.NUMBER).description("삭제 요청된 게시글 아이디")
+                                )
+                        ))).log().all()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .header("Authorization",
+                        "Bearer " + bearerToken)
+                .when()
+                .delete("/posts/{postId}", postId)
+                .then()
+                .log().all().extract();
+    }
+
+    private ExtractableResponse<Response> patchPostRequest_success(String postId) {
+        return RestAssured.given(this.documentationSpec
+                        .accept("application/json")
+                        .filter(document("patchPost",
+                                preprocessRequest(modifyUris()
+                                                .scheme("http")
+                                                .host("localhost")
+                                                .removePort(),
+                                        prettyPrint()),
+                                preprocessResponse(prettyPrint()),
+                                requestFields(
+                                        fieldWithPath("title").type(JsonFieldType.STRING).description("게시글 제목"),
+                                        fieldWithPath("content").type(JsonFieldType.STRING).description("게시글 본문"),
+                                        fieldWithPath("category").type(JsonFieldType.STRING).description("게시글 카테고리")
+                                ),
+                                responseFields(
+                                        fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
+                                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
+                                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
+                                        fieldWithPath("data.id").type(JsonFieldType.NUMBER).description("게시글 아이디"),
+                                        fieldWithPath("data.title").type(JsonFieldType.STRING).description("게시글 제목"),
+                                        fieldWithPath("data.content").type(JsonFieldType.STRING).description("게시글 본문"),
+                                        fieldWithPath("data.category").type(JsonFieldType.STRING).description("게시글 카테고리"),
+                                        fieldWithPath("data.nickname").type(JsonFieldType.STRING).description("유저 닉네임"),
+                                        fieldWithPath("data.postDate").type(JsonFieldType.STRING).description("게시글 발행 시간"),
+                                        fieldWithPath("data.favoriteCount").type(JsonFieldType.NUMBER).description("게시글 좋아요 개수"),
+                                        fieldWithPath("data.commentCount").type(JsonFieldType.NUMBER).description("게시글 댓글 개수"),
+                                        fieldWithPath("data.viewCount").type(JsonFieldType.NUMBER).description("게시글 방문 개수")
+                                ),
+                                pathParameters(
+                                        parameterWithName("postId").description("게시글 아이디")
+                                )
+                        ))).log().all()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .header("Authorization",
+                        "Bearer " + bearerToken)
+                .body(requestData)
+                .when()
+                .patch("/posts/{postId}", postId)
+                .then()
+                .log().all().extract();
+    }
+
+    private ExtractableResponse<Response> patchPostRequest_notExistMember(String postId) {
+        return RestAssured.given(this.documentationSpec
+                        .accept("application/json")
+                        .filter(document("patchPostNotExistMember",
+                                preprocessRequest(modifyUris()
+                                                .scheme("http")
+                                                .host("localhost")
+                                                .removePort(),
+                                        prettyPrint()),
+                                preprocessResponse(prettyPrint()),
+                                responseFields(
+                                        fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
+                                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
+                                        fieldWithPath("data").type(JsonFieldType.STRING).description("게시글 수정 실패")
+                                )
+                        )))
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(requestData)
+                .when()
+                .patch("/posts/{postId}", postId)
+                .then()
+                .extract();
+    }
+
+    private ExtractableResponse<Response> patchPostRequest_notExistPost(String postId) {
+        return RestAssured.given(this.documentationSpec
+                        .accept("application/json")
+                        .filter(document("patchPostnotExistPost",
+                                preprocessRequest(modifyUris()
+                                                .scheme("http")
+                                                .host("localhost")
+                                                .removePort(),
+                                        prettyPrint()),
+                                preprocessResponse(prettyPrint()),
+                                responseFields(
+                                        fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
+                                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
+                                        fieldWithPath("data").type(JsonFieldType.NULL).description("게시글 수정 실패")
+                                )
+                        )))
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .header("Authorization",
+                        "Bearer " + bearerToken)
+                .body(requestData)
+                .when()
+                .patch("/posts/{postId}", postId)
+                .then()
+                .extract();
+    }
+
+    private ExtractableResponse<Response> patchPostRequest_notMatchedMember(String postId) {
+        return RestAssured.given(this.documentationSpec
+                        .accept("application/json")
+                        .filter(document("patchPostnotMatchedMember",
+                                preprocessRequest(modifyUris()
+                                                .scheme("http")
+                                                .host("localhost")
+                                                .removePort(),
+                                        prettyPrint()),
+                                preprocessResponse(prettyPrint()),
+                                responseFields(
+                                        fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
+                                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
+                                        fieldWithPath("data").type(JsonFieldType.NULL).description("게시글 수정 실패")
+                                )
+                        )))
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .header("Authorization",
+                        "Bearer " + bearerToken)
+                .body(requestData)
+                .when()
+                .patch("/posts/{postId}", postId)
+                .then()
+                .extract();
     }
 }
