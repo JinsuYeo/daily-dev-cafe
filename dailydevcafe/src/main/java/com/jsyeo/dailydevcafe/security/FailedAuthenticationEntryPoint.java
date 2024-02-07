@@ -17,6 +17,6 @@ public class FailedAuthenticationEntryPoint implements AuthenticationEntryPoint 
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("{ \"code\": 400,\"message\": \"접근 권한이 없습니다.\",\"data\": \"" + authException.getMessage() + "\" }");
+        response.getWriter().write("{ \"code\": 403,\"message\": \"접근 권한이 없습니다.\",\"data\": \"" + authException.getMessage() + "\" }");
     }
 }

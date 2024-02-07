@@ -1,6 +1,7 @@
 package com.jsyeo.dailydevcafe.domain;
 
 import com.jsyeo.dailydevcafe.domain.member.Member;
+import com.jsyeo.dailydevcafe.dto.request.PatchPostRequestDto;
 import com.jsyeo.dailydevcafe.dto.request.PublishPostRequestDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -55,5 +56,12 @@ public class Post {
         this.category = dto.getCategory();
         this.postDate = LocalDateTime.now();
         this.member = member;
+    }
+
+    public void update(PatchPostRequestDto dto) {
+        this.title = dto.getTitle();
+        this.content = dto.getContent();
+        this.category = dto.getCategory();
+        this.postDate = LocalDateTime.now();
     }
 }

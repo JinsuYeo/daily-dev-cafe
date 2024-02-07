@@ -1,14 +1,13 @@
 package com.jsyeo.dailydevcafe.api;
 
+import com.jsyeo.dailydevcafe.dto.request.PatchPostRequestDto;
 import com.jsyeo.dailydevcafe.dto.request.PublishPostRequestDto;
-import com.jsyeo.dailydevcafe.dto.response.DeletePostResponseDto;
-import com.jsyeo.dailydevcafe.dto.response.GetPostResponseDto;
-import com.jsyeo.dailydevcafe.dto.response.PublishPostResponseDto;
-import com.jsyeo.dailydevcafe.dto.response.ResponseDto;
+import com.jsyeo.dailydevcafe.dto.response.*;
 import com.jsyeo.dailydevcafe.service.PostService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -44,6 +43,15 @@ public class PostApiController {
     public ResponseEntity<? super DeletePostResponseDto> deletePost(@PathVariable("id") @NotNull Long postId) {
 
         ResponseDto responseDto = postService.delete(postId);
+        return ResponseEntity.status(responseDto.getCode()).body(responseDto);
+    }
+
+    @PatchMapping("/posts/{id}")
+    public ResponseEntity<? super PatchPostResponseDto> patchPost(@PathVariable("id") String id,
+                                                                  @AuthenticationPrincipal String email,
+                                                                  @RequestBody @Valid PatchPostRequestDto patchPostRequestDto) {
+        patchPostRequestDto.setId(Long.parseLong(id));
+        ResponseDto responseDto = postService.patch(email, patchPostRequestDto);
         return ResponseEntity.status(responseDto.getCode()).body(responseDto);
     }
 }
