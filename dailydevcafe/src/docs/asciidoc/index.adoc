@@ -7,6 +7,99 @@
 
 ***
 
+= 공통
+
+***
+
+== 인증 실패
+
+=== Http Response
+
+include::{snippets}/forbidden/http-response.adoc[]
+
+=== Reponse Fields
+
+include::{snippets}/forbidden/response-fields.adoc[]
+
+=== Reponse Body
+
+include::{snippets}/forbidden/response-body.adoc[]
+
+== 잘못된 요청
+
+=== Http Response
+
+include::{snippets}/badRequest/http-response.adoc[]
+
+=== Reponse Fields
+
+include::{snippets}/badRequest/response-fields.adoc[]
+
+=== Reponse Body
+
+include::{snippets}/badRequest/response-body.adoc[]
+
+== 서버 오류
+
+=== Http Response
+
+[source,http,options="nowrap"]
+----
+HTTP/1.1 500 Internal Server Error
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 08 Feb 2024 11:31:43 GMT
+Connection: close
+Content-Length: 327
+
+{
+  "code" : 500,
+  "message" : "서버 오류가 발생했습니다.",
+  "data" : "Internal Server Error"
+}
+----
+
+=== Reponse Fields
+
+|===
+|Path|Type|Description
+
+|`+code+`
+|`+Number+`
+|결과 코드
+
+|`+message+`
+|`+String+`
+|결과 메시지
+
+|`+data+`
+|`+String+`
+|오류 상세 메시지
+
+|===
+
+=== Reponse Body
+
+[source,json,options="nowrap"]
+----
+{
+  "code" : 500,
+  "message" : "서버 오류가 발생했습니다.",
+  "data" : "Internal Server Error"
+}
+----
+
+
+***
 = Member
 ***
 
@@ -94,6 +187,118 @@ include::{snippets}/signIn/response-body.adoc[]
 
 ==== 로그인 실패
 include::{snippets}/signInFail/response-body.adoc[]
+
+== OAuth2 로그인
+
+=== Http Request
+
+[source,http,options="nowrap"]
+----
+GET /auth/oauth2/kakao HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+----
+
+=== Http Response
+
+==== 로그인 성공
+
+[source,json,options="nowrap"]
+
+----
+HTTP/1.1 302 Found
+Cache-Control:no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Length: 0
+Date: Thu, 08 Feb 2024 12:22:16 GMT
+Expires: 0
+Keep-Alive: timeout=60
+Location: http://localhost:3000/auth/oauth-response/eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYWthb18zMjk0NjI0NTM3QGVtYWlsLmNvbSIsImlzcyI6ImRhaWx5IGRldiBjYWZlIiwiaWF0IjoxNzA3Mzk0OTM2LCJleHAiOjE3MDczOTg1MzZ9.3QamBmHvK3J2CHmEe-F4bCY5cKTzts7MHf0GvQokJDotp6c6un9rMnty0f9ljYfcdXeu_-dYl-JIRN9Sk6zpLg/3600
+Pragma: no-cache
+Set-Cookie: JSESSIONID=2A39D2AA9966B3C549C5059A597F6C50; Path=/; HttpOnly
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Frame-Options:DENY
+X-Xss-Protection: 0
+----
+
+==== 로그인 실패
+
+[source,json,options="nowrap"]
+
+----
+HTTP/1.1 400 Bad Request
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 08 Feb 2024 11:20:28 GMT
+Connection: close
+
+{
+  "code" : 400,
+  "message" : "인증에 실패했습니다.",
+  "data" : null
+}
+----
+
+== Redirect Url
+
+.+{API_BASE_URL}/auth/oauth-response/{token}/{expiredDate}+
+|===
+|Parameter|Description
+
+|`+API_BASE_URL+`
+|프론트 엔드 서버 base url
+|`+token+`
+|인증 토큰
+|`+expiredDate+`
+|토큰 유효 기간
+
+|===
+
+=== Reponse Fields
+
+==== 로그인 실패
+
+|===
+|Path|Type|Description
+
+|`+code+`
+|`+Number+`
+|결과 코드
+
+|`+message+`
+|`+String+`
+|결과 메시지
+
+|`+data+`
+|`+Null+`
+|OAuth2 로그인 실패
+
+|===
+
+=== Reponse Body
+
+==== 로그인 실패
+[source,json,options="nowrap"]
+----
+{
+  "code" : 400,
+  "message" : "인증에 실패했습니다.",
+  "data" : null
+}
+----
 
 = Post
 ***
