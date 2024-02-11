@@ -99,8 +99,8 @@ class MemberApiControllerTest extends ApiTest {
                         .accept("application/json")
                         .filter(document("signUp",
                                 preprocessRequest(modifyUris()
-                                                .scheme("http")
-                                                .host("localhost")
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
                                                 .removePort(),
                                         prettyPrint()),
                                 preprocessResponse(prettyPrint()),
@@ -133,8 +133,8 @@ class MemberApiControllerTest extends ApiTest {
                         .accept("application/json")
                         .filter(document("signUpDuplicateEmail",
                                 preprocessRequest(modifyUris()
-                                                .scheme("http")
-                                                .host("localhost")
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
                                                 .removePort(),
                                         prettyPrint()),
                                 preprocessResponse(prettyPrint()),
@@ -157,8 +157,8 @@ class MemberApiControllerTest extends ApiTest {
                         .accept("application/json")
                         .filter(document("signUpDuplicateNickname",
                                 preprocessRequest(modifyUris()
-                                                .scheme("http")
-                                                .host("localhost")
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
                                                 .removePort(),
                                         prettyPrint()),
                                 preprocessResponse(prettyPrint()),
@@ -181,8 +181,8 @@ class MemberApiControllerTest extends ApiTest {
                         .accept("application/json")
                         .filter(document("signIn",
                                 preprocessRequest(modifyUris()
-                                                .scheme("http")
-                                                .host("localhost")
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
                                                 .removePort(),
                                         prettyPrint()),
                                 preprocessResponse(prettyPrint()),
@@ -218,8 +218,8 @@ class MemberApiControllerTest extends ApiTest {
                         .accept("application/json")
                         .filter(document("signInFail",
                                 preprocessRequest(modifyUris()
-                                                .scheme("http")
-                                                .host("localhost")
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
                                                 .removePort(),
                                         prettyPrint()),
                                 preprocessResponse(prettyPrint()),

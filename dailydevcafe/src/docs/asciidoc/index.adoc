@@ -5,11 +5,23 @@
 :toc: left
 :toclevels: 4
 
-***
+== 소개
+
+개발자 지식 공유 플랫폼인 Daily Dev Cafe의 RESTful API를 소개하는 문서입니다.
 
 = 공통
 
+== End Point
+
+api.dailydevcafe.com
+
+== Content Type
+
+application/json
+
 ***
+
+= 공통 에러
 
 == 인증 실패
 

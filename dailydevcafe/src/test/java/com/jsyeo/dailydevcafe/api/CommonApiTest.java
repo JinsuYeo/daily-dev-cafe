@@ -48,8 +48,8 @@ public class CommonApiTest extends ApiTest {
                 .accept("application/json")
                 .filter(document("forbidden",
                         preprocessRequest(modifyUris()
-                                        .scheme("http")
-                                        .host("localhost")
+                                        .scheme("https")
+                                        .host("api.dailydevcafe.com")
                                         .removePort(),
                                 prettyPrint()),
                         preprocessResponse(prettyPrint()),
@@ -73,8 +73,8 @@ public class CommonApiTest extends ApiTest {
                 .accept("application/json")
                 .filter(document("badRequest",
                         preprocessRequest(modifyUris()
-                                        .scheme("http")
-                                        .host("localhost")
+                                        .scheme("https")
+                                        .host("api.dailydevcafe.com")
                                         .removePort(),
                                 prettyPrint()),
                         preprocessResponse(prettyPrint()),

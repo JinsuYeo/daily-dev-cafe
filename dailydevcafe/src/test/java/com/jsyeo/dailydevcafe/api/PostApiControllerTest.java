@@ -217,9 +217,9 @@ public class PostApiControllerTest extends ApiTest {
                         .accept("application/json")
                         .filter(document("publishPost",
                                 preprocessRequest(modifyUris()
-                                        .scheme("http")
-                                        .host("localhost")
-                                        .removePort(),
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
+                                                .removePort(),
                                         prettyPrint()),
                                 preprocessResponse(prettyPrint()),
                                 requestFields(
@@ -256,8 +256,8 @@ public class PostApiControllerTest extends ApiTest {
                         .accept("application/json")
                         .filter(document("publishPostfail",
                                 preprocessRequest(modifyUris()
-                                                .scheme("http")
-                                                .host("localhost")
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
                                                 .removePort(),
                                         prettyPrint()),
                                 preprocessResponse(prettyPrint()),
@@ -287,8 +287,8 @@ public class PostApiControllerTest extends ApiTest {
                         .accept("application/json")
                         .filter(document("getPost",
                                 preprocessRequest(modifyUris()
-                                                .scheme("http")
-                                                .host("localhost")
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
                                                 .removePort(),
                                         prettyPrint()),
                                 preprocessResponse(prettyPrint()),
@@ -321,8 +321,8 @@ public class PostApiControllerTest extends ApiTest {
                         .accept("application/json")
                         .filter(document("getPostFail",
                                 preprocessRequest(modifyUris()
-                                                .scheme("http")
-                                                .host("localhost")
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
                                                 .removePort(),
                                         prettyPrint()),
                                 preprocessResponse(prettyPrint()),
@@ -348,8 +348,8 @@ public class PostApiControllerTest extends ApiTest {
                         .accept("application/json")
                         .filter(document("deletePost",
                                 preprocessRequest(modifyUris()
-                                                .scheme("http")
-                                                .host("localhost")
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
                                                 .removePort(),
                                         prettyPrint()),
                                 preprocessResponse(prettyPrint()),
@@ -376,8 +376,8 @@ public class PostApiControllerTest extends ApiTest {
                         .accept("application/json")
                         .filter(document("deletePostFail",
                                 preprocessRequest(modifyUris()
-                                                .scheme("http")
-                                                .host("localhost")
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
                                                 .removePort(),
                                         prettyPrint()),
                                 preprocessResponse(prettyPrint()),
@@ -401,8 +401,8 @@ public class PostApiControllerTest extends ApiTest {
                         .accept("application/json")
                         .filter(document("patchPost",
                                 preprocessRequest(modifyUris()
-                                                .scheme("http")
-                                                .host("localhost")
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
                                                 .removePort(),
                                         prettyPrint()),
                                 preprocessResponse(prettyPrint()),
@@ -444,8 +444,8 @@ public class PostApiControllerTest extends ApiTest {
                         .accept("application/json")
                         .filter(document("patchPostNotExistMember",
                                 preprocessRequest(modifyUris()
-                                                .scheme("http")
-                                                .host("localhost")
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
                                                 .removePort(),
                                         prettyPrint()),
                                 preprocessResponse(prettyPrint()),
@@ -468,8 +468,8 @@ public class PostApiControllerTest extends ApiTest {
                         .accept("application/json")
                         .filter(document("patchPostnotExistPost",
                                 preprocessRequest(modifyUris()
-                                                .scheme("http")
-                                                .host("localhost")
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
                                                 .removePort(),
                                         prettyPrint()),
                                 preprocessResponse(prettyPrint()),
@@ -494,8 +494,8 @@ public class PostApiControllerTest extends ApiTest {
                         .accept("application/json")
                         .filter(document("patchPostnotMatchedMember",
                                 preprocessRequest(modifyUris()
-                                                .scheme("http")
-                                                .host("localhost")
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
                                                 .removePort(),
                                         prettyPrint()),
                                 preprocessResponse(prettyPrint()),

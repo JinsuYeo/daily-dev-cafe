@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,13 +32,14 @@ public class InitDb {
     static class InitService {
 
         private final EntityManager em;
+        private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         public void dbInit() {
             SignUpRequestDto memberDto = new SignUpRequestDto();
             memberDto.setName("memberA");
             memberDto.setEmail("test@test.com");
             memberDto.setNickname("testNickname");
-            memberDto.setPassword("Pa$sw0rd");
+            memberDto.setPassword(passwordEncoder.encode("Pa$sw0rd"));
             memberDto.setAgreedPersonal(true);
 
             Member member = new Member(memberDto);
