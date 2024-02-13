@@ -38,8 +38,5 @@ public class MemberApiController {
         return "OAuth Login";
     }
 
-//    @GetMapping("/auth/oauth-response/{token}/{expiredDate}")
-//    public String oauth2Success(@PathVariable("token") String token, @PathVariable("expiredDate") String expiredDate) {
-//        return token + "/" + expiredDate;
-//    }
+
 }

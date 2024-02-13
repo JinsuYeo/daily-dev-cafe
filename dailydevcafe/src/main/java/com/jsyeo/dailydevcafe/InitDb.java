@@ -45,13 +45,15 @@ public class InitDb {
             Member member = new Member(memberDto);
             em.persist(member);
 
-            PublishPostRequestDto postDto = new PublishPostRequestDto();
-            postDto.setTitle("Test Title");
-            postDto.setContent("Publish Post Test");
-            postDto.setCategory("Test Category");
+            for (int i = 0; i < 40; i++) {
+                PublishPostRequestDto postDto = new PublishPostRequestDto();
+                postDto.setTitle("Test Title" + i);
+                postDto.setContent("Publish Post Test" + i);
+                postDto.setCategory("Test Category" + i);
 
-            Post post = new Post(postDto, member);
-            em.persist(post);
+                Post post = new Post(postDto, member);
+                em.persist(post);
+            }
         }
     }
 }

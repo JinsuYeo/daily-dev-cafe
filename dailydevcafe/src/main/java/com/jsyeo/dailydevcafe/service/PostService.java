@@ -7,14 +7,21 @@ import com.jsyeo.dailydevcafe.dto.request.PatchPostRequestDto;
 import com.jsyeo.dailydevcafe.dto.request.PublishPostRequestDto;
 import com.jsyeo.dailydevcafe.dto.response.*;
 import com.jsyeo.dailydevcafe.repository.MemberRepository;
+import com.jsyeo.dailydevcafe.repository.PostQueryRespository;
 import com.jsyeo.dailydevcafe.repository.PostRepository;
+import com.jsyeo.dailydevcafe.repository.PostSearchCond;
+import com.querydsl.jpa.impl.JPAQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -24,6 +31,7 @@ public class PostService {
 
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
+    private final PostQueryRespository postQueryRespository;
 
     @Transactional
     public ResponseDto<? super PostDto> publish(String email,
@@ -85,4 +93,19 @@ public class PostService {
         return PatchPostResponseDto.success(new PostDto(post));
     }
 
+    public ResponseDto<? super List<PostDto>> findPosts(PostSearchCond cond, Pageable pageable) {
+
+        List<Post> posts = postQueryRespository.findAll(cond, pageable);
+
+        if (posts.isEmpty()) {
+            return GetPostsResponseDto.notExistPost();
+        }
+
+        Long count = postQueryRespository.countAll(cond);
+        List<PostDto> postDtos = posts.stream()
+                .map(PostDto::new)
+                .collect(Collectors.toList());
+
+        return GetPostsResponseDto.success(postDtos, count);
+    }
 }
