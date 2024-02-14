@@ -26,7 +26,7 @@ public class PostApiController {
 
     @GetMapping("/posts")
     public ResponseEntity<? super GetPostsResponseDto> getPosts(@ModelAttribute("postSearchCond") PostSearchCond postSearchCond,
-                                                                @PageableDefault(size = 20, sort = "postDate", direction = Sort.Direction.DESC) Pageable pageable) {
+                                                                @PageableDefault(size = 20, sort = "postDate") Pageable pageable) {
         ResponseDto<? super List<PostDto>> responseDto = postService.findPosts(postSearchCond, pageable);
         return ResponseEntity.status(responseDto.getCode()).body(responseDto);
     }

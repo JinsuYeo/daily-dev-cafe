@@ -101,15 +101,13 @@ public class PostQueryRespository {
 
             for (Sort.Order order : sort) {
 
-                Order direction = order.getDirection().isAscending() ? Order.ASC : Order.DESC;
-
                 switch (order.getProperty()) {
                     case "postDate":
-                        return new OrderSpecifier(direction, post.postDate);
+                        return new OrderSpecifier(Order.DESC, post.postDate);
                     case "title":
-                        return new OrderSpecifier(direction, post.title);
+                        return new OrderSpecifier(Order.ASC, post.title);
                     case "popularity":
-                        return new OrderSpecifier(direction, post.favoriteCount);
+                        return new OrderSpecifier(Order.DESC, post.favoriteCount);
                 }
             }
         }
