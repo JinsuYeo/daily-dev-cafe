@@ -87,12 +87,12 @@ clean {
 }
 
 bootJar {
+	mainClass = 'com.jsyeo.dailydevcafe.DailydevcafeApplication'
 	dependsOn asciidoctor
 	copy {
 		from asciidoctor.outputDir
 		into "src/main/resources/static/docs"
 	}
-	mainClass = 'com.jsyeo.dailydevcafe'
 }
 
 bootRun {
