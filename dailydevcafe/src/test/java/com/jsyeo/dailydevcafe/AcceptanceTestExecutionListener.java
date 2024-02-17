@@ -1,15 +1,18 @@
 package com.jsyeo.dailydevcafe;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
 
 import java.util.List;
 
+@Slf4j
 public class AcceptanceTestExecutionListener extends AbstractTestExecutionListener {
 
     @Override
     public void beforeTestMethod(TestContext testContext) throws Exception {
+        log.info("beforeTestMethod");
         final JdbcTemplate jdbcTemplate = getJdbcTemplate(testContext);
         final List<String> truncateQueries = getTruncateQueries(jdbcTemplate);
         truncateTables(jdbcTemplate, truncateQueries);
@@ -17,6 +20,7 @@ public class AcceptanceTestExecutionListener extends AbstractTestExecutionListen
 
     @Override
     public void afterTestMethod(final TestContext testContext) {
+        log.info("afterTestMethod");
         final JdbcTemplate jdbcTemplate = getJdbcTemplate(testContext);
         final List<String> truncateQueries = getTruncateQueries(jdbcTemplate);
         truncateTables(jdbcTemplate, truncateQueries);

@@ -15,10 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.restdocs.restassured.RestDocumentationFilter;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.querydsl.core.types.Order.DESC;
 import static org.assertj.core.api.Assertions.*;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
@@ -69,7 +71,8 @@ public class PostApiControllerTest extends ApiTest {
 
         ExtractableResponse<Response> response = publishPostRequest_fail("/post");
 
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());;
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+        ;
     }
 
     @Test
@@ -160,8 +163,25 @@ public class PostApiControllerTest extends ApiTest {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
     }
 
-    //== RestAssured ==//
+    @Test
+    void getPosts_successTest() {
+        signUp();
+        for (int i = 0; i < 20; i++) {
+            publishPost();
+        }
 
+        ExtractableResponse<Response> response = getPosts_success();
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
+
+    @Test
+    void getPosts_failTest() {
+
+        ExtractableResponse<Response> response = getPosts_fail();
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+    }
+
+    //==== RestAssured ====//
     private void signUp() {
         SignUpRequestDto dto = new SignUpRequestDto();
         dto.setName("memberA");
@@ -220,8 +240,34 @@ public class PostApiControllerTest extends ApiTest {
                                                 .scheme("https")
                                                 .host("api.dailydevcafe.com")
                                                 .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
                                         prettyPrint()),
-                                preprocessResponse(prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
                                 requestFields(
                                         fieldWithPath("title").type(JsonFieldType.STRING).description("게시글 제목"),
                                         fieldWithPath("content").type(JsonFieldType.STRING).description("게시글 본문"),
@@ -259,8 +305,34 @@ public class PostApiControllerTest extends ApiTest {
                                                 .scheme("https")
                                                 .host("api.dailydevcafe.com")
                                                 .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
                                         prettyPrint()),
-                                preprocessResponse(prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
                                 requestFields(
                                         fieldWithPath("title").type(JsonFieldType.STRING).description("게시글 제목"),
                                         fieldWithPath("content").type(JsonFieldType.STRING).description("게시글 본문"),
@@ -290,8 +362,34 @@ public class PostApiControllerTest extends ApiTest {
                                                 .scheme("https")
                                                 .host("api.dailydevcafe.com")
                                                 .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
                                         prettyPrint()),
-                                preprocessResponse(prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
                                 responseFields(
                                         fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
                                         fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
@@ -324,8 +422,34 @@ public class PostApiControllerTest extends ApiTest {
                                                 .scheme("https")
                                                 .host("api.dailydevcafe.com")
                                                 .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
                                         prettyPrint()),
-                                preprocessResponse(prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
                                 responseFields(
                                         fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
                                         fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
@@ -351,8 +475,34 @@ public class PostApiControllerTest extends ApiTest {
                                                 .scheme("https")
                                                 .host("api.dailydevcafe.com")
                                                 .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
                                         prettyPrint()),
-                                preprocessResponse(prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
                                 responseFields(
                                         fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
                                         fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
@@ -379,8 +529,34 @@ public class PostApiControllerTest extends ApiTest {
                                                 .scheme("https")
                                                 .host("api.dailydevcafe.com")
                                                 .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
                                         prettyPrint()),
-                                preprocessResponse(prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
                                 responseFields(
                                         fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
                                         fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
@@ -404,8 +580,34 @@ public class PostApiControllerTest extends ApiTest {
                                                 .scheme("https")
                                                 .host("api.dailydevcafe.com")
                                                 .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
                                         prettyPrint()),
-                                preprocessResponse(prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
                                 requestFields(
                                         fieldWithPath("title").type(JsonFieldType.STRING).description("게시글 제목"),
                                         fieldWithPath("content").type(JsonFieldType.STRING).description("게시글 본문"),
@@ -447,8 +649,34 @@ public class PostApiControllerTest extends ApiTest {
                                                 .scheme("https")
                                                 .host("api.dailydevcafe.com")
                                                 .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
                                         prettyPrint()),
-                                preprocessResponse(prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
                                 responseFields(
                                         fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
                                         fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
@@ -471,8 +699,34 @@ public class PostApiControllerTest extends ApiTest {
                                                 .scheme("https")
                                                 .host("api.dailydevcafe.com")
                                                 .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
                                         prettyPrint()),
-                                preprocessResponse(prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
                                 responseFields(
                                         fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
                                         fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
@@ -497,8 +751,34 @@ public class PostApiControllerTest extends ApiTest {
                                                 .scheme("https")
                                                 .host("api.dailydevcafe.com")
                                                 .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
                                         prettyPrint()),
-                                preprocessResponse(prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
                                 responseFields(
                                         fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
                                         fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
@@ -513,5 +793,130 @@ public class PostApiControllerTest extends ApiTest {
                 .patch("/posts/{postId}", postId)
                 .then()
                 .extract();
+    }
+
+    private ExtractableResponse<Response> getPosts_success() {
+        return RestAssured.given(this.documentationSpec
+                        .accept("application/json")
+                        .filter(document("getPosts",
+                                preprocessRequest(modifyUris()
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
+                                                .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
+                                responseFields(
+                                        fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
+                                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
+                                        fieldWithPath("data[].id").type(JsonFieldType.NUMBER).description("게시글 아이디"),
+                                        fieldWithPath("data[].title").type(JsonFieldType.STRING).description("게시글 제목"),
+                                        fieldWithPath("data[].content").type(JsonFieldType.STRING).description("게시글 본문"),
+                                        fieldWithPath("data[].category").type(JsonFieldType.STRING).description("게시글 카테고리"),
+                                        fieldWithPath("data[].nickname").type(JsonFieldType.STRING).description("유저 닉네임"),
+                                        fieldWithPath("data[].postDate").type(JsonFieldType.STRING).description("게시글 발행 시간"),
+                                        fieldWithPath("data[].favoriteCount").type(JsonFieldType.NUMBER).description("게시글 좋아요 개수"),
+                                        fieldWithPath("data[].commentCount").type(JsonFieldType.NUMBER).description("게시글 댓글 개수"),
+                                        fieldWithPath("data[].viewCount").type(JsonFieldType.NUMBER).description("게시글 방문 개수"),
+                                        fieldWithPath("count").type(JsonFieldType.NUMBER).description("게시글 총 개수")
+                                ),
+                                pathParameters(
+                                        parameterWithName("title").optional().description("게시글 제목"),
+                                        parameterWithName("content").optional().description("게시글 본문"),
+                                        parameterWithName("category").optional().description("게시글 카테고리"),
+                                        parameterWithName("nickname").optional().description("유저 닉네임"),
+                                        parameterWithName("pageNumber").optional().description("페이지 번호"),
+                                        parameterWithName("pageSize").optional().description("페이지 당 게시글 개수: default=20, max size=50"),
+                                        parameterWithName("sort").optional().description("정렬 기준: postDate=최신순, title=제목순, popularity=좋아요순")
+                                )
+                        ))).log().all()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when()
+                .get("/posts?title={title}&content={content}&category={category}&nickname={nickname}&page={pageNumber}&size={pageSize}&sort={sort}",
+                        requestData.get("title"),
+                        requestData.get("content"),
+                        requestData.get("category"),
+                        "testNickname",
+                        0,
+                        20,
+                        "postDate"
+                )
+                .then()
+                .log().all().extract();
+    }
+
+    private ExtractableResponse<Response> getPosts_fail() {
+        return RestAssured.given(this.documentationSpec
+                        .accept("application/json")
+                        .filter(document("getPostsFail",
+                                preprocessRequest(modifyUris()
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
+                                                .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
+                                responseFields(
+                                        fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
+                                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
+                                        fieldWithPath("data").type(JsonFieldType.NULL).description("게시글 조회 실패"),
+                                        fieldWithPath("count").type(JsonFieldType.NUMBER).description("게시글 총 개수")
+                                )
+                        ))).log().all()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when()
+                .get("/posts")
+                .then()
+                .log().all().extract();
     }
 }

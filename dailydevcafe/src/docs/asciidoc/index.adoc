@@ -15,14 +15,6 @@
 
 api.dailydevcafe.com
 
-== Content Type
-
-application/json
-
-***
-
-= 공통 에러
-
 == 인증 실패
 
 === Http Response
@@ -32,10 +24,6 @@ include::{snippets}/forbidden/http-response.adoc[]
 === Reponse Fields
 
 include::{snippets}/forbidden/response-fields.adoc[]
-
-=== Reponse Body
-
-include::{snippets}/forbidden/response-body.adoc[]
 
 == 잘못된 요청
 
@@ -47,10 +35,6 @@ include::{snippets}/badRequest/http-response.adoc[]
 
 include::{snippets}/badRequest/response-fields.adoc[]
 
-=== Reponse Body
-
-include::{snippets}/badRequest/response-body.adoc[]
-
 == 서버 오류
 
 === Http Response
@@ -58,20 +42,7 @@ include::{snippets}/badRequest/response-body.adoc[]
 [source,http,options="nowrap"]
 ----
 HTTP/1.1 500 Internal Server Error
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 0
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
 Content-Type: application/json
-Transfer-Encoding: chunked
-Date: Thu, 08 Feb 2024 11:31:43 GMT
-Connection: close
-Content-Length: 327
 
 {
   "code" : 500,
@@ -98,18 +69,6 @@ Content-Length: 327
 |오류 상세 메시지
 
 |===
-
-=== Reponse Body
-
-[source,json,options="nowrap"]
-----
-{
-  "code" : 500,
-  "message" : "서버 오류가 발생했습니다.",
-  "data" : "Internal Server Error"
-}
-----
-
 
 ***
 = Member
@@ -147,21 +106,6 @@ include::{snippets}/signUpDuplicateEmail/response-fields.adoc[]
 ==== 회원가입 실패 - 중복 닉네임
 include::{snippets}/signUpDuplicateNickname/response-fields.adoc[]
 
-=== Request Body
-
-include::{snippets}/signUp/request-body.adoc[]
-
-=== Reponse Body
-
-==== 회원가입 성공
-include::{snippets}/signUp/response-body.adoc[]
-
-==== 회원가입 실패 - 중복 이메일
-include::{snippets}/signUpDuplicateEmail/response-body.adoc[]
-
-==== 회원가입 실패 - 중복 닉네임
-include::{snippets}/signUpDuplicateNickname/response-body.adoc[]
-
 == 로그인
 
 === Http Request
@@ -188,18 +132,6 @@ include::{snippets}/signIn/response-fields.adoc[]
 ==== 로그인 실패
 include::{snippets}/signInFail/response-fields.adoc[]
 
-=== Request Body
-
-include::{snippets}/signIn/request-body.adoc[]
-
-=== Reponse Body
-
-==== 로그인 성공
-include::{snippets}/signIn/response-body.adoc[]
-
-==== 로그인 실패
-include::{snippets}/signInFail/response-body.adoc[]
-
 == OAuth2 로그인
 
 === Http Request
@@ -220,21 +152,9 @@ Content-Type: application/json
 
 ----
 HTTP/1.1 302 Found
-Cache-Control:no-cache, no-store, max-age=0, must-revalidate
-Connection: keep-alive
-Content-Length: 0
-Date: Thu, 08 Feb 2024 12:22:16 GMT
-Expires: 0
 Keep-Alive: timeout=60
 Location: http://localhost:3000/auth/oauth-response/eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYWthb18zMjk0NjI0NTM3QGVtYWlsLmNvbSIsImlzcyI6ImRhaWx5IGRldiBjYWZlIiwiaWF0IjoxNzA3Mzk0OTM2LCJleHAiOjE3MDczOTg1MzZ9.3QamBmHvK3J2CHmEe-F4bCY5cKTzts7MHf0GvQokJDotp6c6un9rMnty0f9ljYfcdXeu_-dYl-JIRN9Sk6zpLg/3600
-Pragma: no-cache
 Set-Cookie: JSESSIONID=2A39D2AA9966B3C549C5059A597F6C50; Path=/; HttpOnly
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-X-Content-Type-Options: nosniff
-X-Frame-Options:DENY
-X-Xss-Protection: 0
 ----
 
 ==== 로그인 실패
@@ -243,19 +163,7 @@ X-Xss-Protection: 0
 
 ----
 HTTP/1.1 400 Bad Request
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 0
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
 Content-Type: application/json
-Transfer-Encoding: chunked
-Date: Thu, 08 Feb 2024 11:20:28 GMT
-Connection: close
 
 {
   "code" : 400,
@@ -300,18 +208,6 @@ Connection: close
 
 |===
 
-=== Reponse Body
-
-==== 로그인 실패
-[source,json,options="nowrap"]
-----
-{
-  "code" : 400,
-  "message" : "인증에 실패했습니다.",
-  "data" : null
-}
-----
-
 = Post
 ***
 == 게시글 발행
@@ -335,18 +231,6 @@ include::{snippets}/publishPost/response-fields.adoc[]
 
 ==== 저장 실패
 include::{snippets}/publishPostfail/response-fields.adoc[]
-
-=== Request Body
-
-include::{snippets}/publishPost/request-body.adoc[]
-
-=== Reponse Body
-
-==== 저장 성공
-include::{snippets}/publishPost/response-body.adoc[]
-
-==== 저장 실패
-include::{snippets}/publishPostfail/response-body.adoc[]
 
 ***
 
@@ -376,14 +260,6 @@ include::{snippets}/getPost/response-fields.adoc[]
 ==== 조회 실패
 include::{snippets}/getPostFail/response-fields.adoc[]
 
-=== Reponse Body
-
-==== 조회 성공
-include::{snippets}/getPost/response-body.adoc[]
-
-==== 조회 실패
-include::{snippets}/getPostFail/response-body.adoc[]
-
 == 게시글 삭제
 
 === Http Request
@@ -409,14 +285,6 @@ include::{snippets}/deletePost/response-fields.adoc[]
 
 ==== 조회 실패
 include::{snippets}/deletePostFail/response-fields.adoc[]
-
-=== Reponse Body
-
-==== 조회 성공
-include::{snippets}/deletePost/response-body.adoc[]
-
-==== 조회 실패
-include::{snippets}/deletePostFail/response-body.adoc[]
 
 == 게시글 수정
 
@@ -460,20 +328,28 @@ include::{snippets}/patchPostnotExistPost/response-fields.adoc[]
 ==== 게시글 수정 실패 - 게시글 수정 권한 없음
 include::{snippets}/patchPostnotMatchedMember/response-fields.adoc[]
 
-=== Request Body
+== 게시글 목록 조회
 
-include::{snippets}/patchPost/request-body.adoc[]
+=== Http Request
 
-=== Reponse Body
+include::{snippets}/getPosts/http-request.adoc[]
 
-==== 게시글 수정 성공
-include::{snippets}/patchPost/response-body.adoc[]
+=== Http Response
 
-==== 게시글 수정 실패 - 존재하지 않는 이메일
-include::{snippets}/patchPostNotExistMember/response-body.adoc[]
+==== 조회 성공
+include::{snippets}/getPosts/http-response.adoc[]
 
-==== 게시글 수정 실패 - 존재하지 않는 게시글
-include::{snippets}/patchPostnotExistPost/response-body.adoc[]
+==== 조회 실패
+include::{snippets}/getPostsFail/http-response.adoc[]
 
-==== 게시글 수정 실패 - 게시글 수정 권한 없음
-include::{snippets}/patchPostnotMatchedMember/response-body.adoc[]
+=== Path Parameters
+
+include::{snippets}/getPosts/path-parameters.adoc[]
+
+=== Reponse Fields
+
+==== 조회 성공
+include::{snippets}/getPosts/response-fields.adoc[]
+
+==== 조회 실패
+include::{snippets}/getPostsFail/response-fields.adoc[]

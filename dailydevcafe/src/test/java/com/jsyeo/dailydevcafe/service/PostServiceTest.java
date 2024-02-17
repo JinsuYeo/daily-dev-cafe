@@ -6,13 +6,17 @@ import com.jsyeo.dailydevcafe.dto.request.PatchPostRequestDto;
 import com.jsyeo.dailydevcafe.dto.request.PublishPostRequestDto;
 import com.jsyeo.dailydevcafe.dto.request.SignUpRequestDto;
 import com.jsyeo.dailydevcafe.dto.response.ResponseDto;
+import com.jsyeo.dailydevcafe.repository.PostSearchCond;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -107,6 +111,31 @@ public class PostServiceTest extends ServiceTest {
         PostDto data = (PostDto) responseDto.getData();
         assertThat(data.getTitle()).isEqualTo(requestDto.getTitle());
         assertThat(data.getCategory()).isEqualTo(requestDto.getCategory());
+    }
+
+    @Test
+    void getPostsTest() {
+        // given
+        for (int i = 1; i <= 40; i++) {
+            PublishPostRequestDto requestDto = createPublishPostRequestDto();
+            requestDto.setTitle(requestDto.getTitle() + i);
+            postService.publish(TEST_EMAIL, requestDto);
+        }
+
+        //when
+        Pageable page = PageRequest.of(0, 20, Sort.by("postDate").descending());
+        PostSearchCond cond = new PostSearchCond();
+        cond.setTitle(TEST_TITLE);
+        ResponseDto<? super List<PostDto>> responseDto = postService.findPosts(cond, page);
+
+        //then
+        log.info(responseDto.getMessage());
+        assertThat(responseDto.getCode()).isEqualTo(HttpStatus.OK.value());
+        List<PostDto> responsePostDto = (List<PostDto>) responseDto.getData();
+        assertThat(responsePostDto.size()).isEqualTo(20);
+        for (int i = 0; i < responsePostDto.size(); i++) {
+            assertThat(responsePostDto.get(i).getTitle()).isEqualTo(TEST_TITLE + (40-i));
+        }
     }
 
     private PublishPostRequestDto createPublishPostRequestDto() {

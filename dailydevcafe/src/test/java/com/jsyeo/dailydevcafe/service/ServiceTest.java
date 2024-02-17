@@ -5,7 +5,7 @@ import com.jsyeo.dailydevcafe.dto.request.SignInRequestDto;
 import com.jsyeo.dailydevcafe.dto.request.SignUpRequestDto;
 import org.springframework.test.context.TestExecutionListeners;
 
-@TestExecutionListeners(value = {AcceptanceTestExecutionListener.class,}, mergeMode = TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS)
+//@TestExecutionListeners(value = {AcceptanceTestExecutionListener.class,}, mergeMode = TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS)
 public class ServiceTest {
 
     SignUpRequestDto createSignUpRequestDto(String email, String nickname) {

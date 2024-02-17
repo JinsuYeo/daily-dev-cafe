@@ -45,18 +45,44 @@ public class CommonApiTest extends ApiTest {
     @Test
     void forbiddenTest() throws Exception {
         RestAssured.given(this.documentationSpec
-                .accept("application/json")
-                .filter(document("forbidden",
-                        preprocessRequest(modifyUris()
-                                        .scheme("https")
-                                        .host("api.dailydevcafe.com")
-                                        .removePort(),
-                                prettyPrint()),
-                        preprocessResponse(prettyPrint()),
-                        responseFields(
-                                fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
-                                fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
-                                fieldWithPath("data").type(JsonFieldType.STRING).description("오류 상세 메시지")))))
+                        .accept("application/json")
+                        .filter(document("forbidden",
+                                preprocessRequest(modifyUris()
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
+                                                .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
+                                responseFields(
+                                        fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
+                                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
+                                        fieldWithPath("data").type(JsonFieldType.STRING).description("오류 상세 메시지")))))
                 .log().all()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
@@ -70,18 +96,44 @@ public class CommonApiTest extends ApiTest {
     void badRequestExceptionTest() {
 
         RestAssured.given(this.documentationSpec
-                .accept("application/json")
-                .filter(document("badRequest",
-                        preprocessRequest(modifyUris()
-                                        .scheme("https")
-                                        .host("api.dailydevcafe.com")
-                                        .removePort(),
-                                prettyPrint()),
-                        preprocessResponse(prettyPrint()),
-                        responseFields(
-                                fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
-                                fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
-                                fieldWithPath("data").type(JsonFieldType.STRING).description("오류 상세 메시지")))))
+                        .accept("application/json")
+                        .filter(document("badRequest",
+                                preprocessRequest(modifyUris()
+                                                .scheme("https")
+                                                .host("api.dailydevcafe.com")
+                                                .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
+                                responseFields(
+                                        fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
+                                        fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
+                                        fieldWithPath("data").type(JsonFieldType.STRING).description("오류 상세 메시지")))))
                 .log().all()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
@@ -107,7 +159,7 @@ public class CommonApiTest extends ApiTest {
         Member member = new Member(dto);
 
         RestAssured.given()
-        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(member)
                 .when()
                 .port(this.port)

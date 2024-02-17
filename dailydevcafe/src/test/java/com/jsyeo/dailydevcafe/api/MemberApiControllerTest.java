@@ -102,8 +102,34 @@ class MemberApiControllerTest extends ApiTest {
                                                 .scheme("https")
                                                 .host("api.dailydevcafe.com")
                                                 .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
                                         prettyPrint()),
-                                preprocessResponse(prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
                                 requestFields(
                                         fieldWithPath("name").type(JsonFieldType.STRING).description("유저 이름"),
                                         fieldWithPath("email").type(JsonFieldType.STRING).description("유저 이메일"),
@@ -136,8 +162,34 @@ class MemberApiControllerTest extends ApiTest {
                                                 .scheme("https")
                                                 .host("api.dailydevcafe.com")
                                                 .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
                                         prettyPrint()),
-                                preprocessResponse(prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
                                 responseFields(
                                         fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
                                         fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
@@ -160,8 +212,34 @@ class MemberApiControllerTest extends ApiTest {
                                                 .scheme("https")
                                                 .host("api.dailydevcafe.com")
                                                 .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
                                         prettyPrint()),
-                                preprocessResponse(prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
                                 responseFields(
                                         fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
                                         fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
@@ -184,8 +262,34 @@ class MemberApiControllerTest extends ApiTest {
                                                 .scheme("https")
                                                 .host("api.dailydevcafe.com")
                                                 .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
                                         prettyPrint()),
-                                preprocessResponse(prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
                                 requestFields(
                                         fieldWithPath("email").type(JsonFieldType.STRING).description("유저 이메일"),
                                         fieldWithPath("password").type(JsonFieldType.STRING).description("유저 비밀번호")
@@ -221,8 +325,34 @@ class MemberApiControllerTest extends ApiTest {
                                                 .scheme("https")
                                                 .host("api.dailydevcafe.com")
                                                 .removePort(),
+                                        modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
                                         prettyPrint()),
-                                preprocessResponse(prettyPrint()),
+                                preprocessResponse(modifyHeaders()
+                                                .remove("Vary")
+                                                .remove("Cache-Control")
+                                                .remove("Pragma")
+                                                .remove("Content-Length")
+                                                .remove("Date")
+                                                .remove("Keep-Alive")
+                                                .remove("Connection")
+                                                .remove("Expires")
+                                                .remove("X-Content-Type-Options")
+                                                .remove("X-XSS-Protection")
+                                                .remove("X-Frame-Options")
+                                                .remove("Transfer-Encoding"),
+                                        prettyPrint()),
                                 responseFields(
                                         fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
                                         fieldWithPath("message").type(JsonFieldType.STRING).description("결과 메시지"),
