@@ -21,6 +21,6 @@ public class GetPostsResponseDto extends ResponseDto {
     }
 
     public static GetPostsResponseDto notExistPost() {
-        return new GetPostsResponseDto(HttpStatus.BAD_REQUEST.value(), "존재하지 않는 게시물입니다.", null, null);
+        return new GetPostsResponseDto(HttpStatus.BAD_REQUEST.value(), "존재하지 않는 게시물입니다.", null, 0L);
     }
 }

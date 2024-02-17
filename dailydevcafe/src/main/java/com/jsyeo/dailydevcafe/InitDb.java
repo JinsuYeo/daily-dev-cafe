@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
+@Profile("dev")
 public class InitDb {
 
     private final InitService initService;
@@ -45,7 +46,7 @@ public class InitDb {
             Member member = new Member(memberDto);
             em.persist(member);
 
-            for (int i = 0; i < 40; i++) {
+            for (int i = 1; i <= 40; i++) {
                 PublishPostRequestDto postDto = new PublishPostRequestDto();
                 postDto.setTitle("Test Title" + i);
                 postDto.setContent("Publish Post Test" + i);
