@@ -132,10 +132,10 @@ class MemberApiControllerTest extends ApiTest {
                                         prettyPrint()),
                                 requestFields(
                                         fieldWithPath("name").type(JsonFieldType.STRING).description("유저 이름"),
-                                        fieldWithPath("email").type(JsonFieldType.STRING).description("유저 이메일"),
-                                        fieldWithPath("nickname").type(JsonFieldType.STRING).description("유저 닉네임"),
-                                        fieldWithPath("password").type(JsonFieldType.STRING).description("유저 비밀번호"),
-                                        fieldWithPath("agreedPersonal").type(JsonFieldType.BOOLEAN).description("개인정보 수집 동의")
+                                        fieldWithPath("email").type(JsonFieldType.STRING).description("유저 이메일 - 이메일 형식이어야 한다."),
+                                        fieldWithPath("nickname").type(JsonFieldType.STRING).description("유저 닉네임 - 2~10자"),
+                                        fieldWithPath("password").type(JsonFieldType.STRING).description("유저 비밀번호 - 8~20자, 적어도 하나의 숫자, 알파벳 소문자, 대문자, 특수문자가 포함되어야하며, 공백이 없어야한다."),
+                                        fieldWithPath("agreedPersonal").type(JsonFieldType.BOOLEAN).description("개인정보 수집 동의 - true여야 한다.")
                                 ),
                                 responseFields(
                                         fieldWithPath("code").type(JsonFieldType.NUMBER).description("결과 코드"),
