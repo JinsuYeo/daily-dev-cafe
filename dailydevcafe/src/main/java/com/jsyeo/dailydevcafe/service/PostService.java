@@ -95,7 +95,7 @@ public class PostService {
         return PatchPostResponseDto.success(new PostDto(post));
     }
 
-    @Cacheable(value = "postsCache", key = "#cond.hashCode() + \" \" + #pageable.hashCode()")
+    @Cacheable(value = "postsCache", key = "#cond.hashCode() + \" \" + #pageable.hashCode()", condition = "#pageable.getPageNumber() < 10")
     public ResponseDto<? super List<PostDto>> findPosts(PostSearchCond cond, Pageable pageable) {
 
         List<Post> posts = postQueryRespository.findAll(cond, pageable);
