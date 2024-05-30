@@ -13,6 +13,7 @@ import com.jsyeo.dailydevcafe.repository.PostSearchCond;
 import com.querydsl.jpa.impl.JPAQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -49,6 +50,7 @@ public class PostService {
         return PublishPostResponseDto.success(new PostDto(post));
     }
 
+    @Cacheable(value="postCache")
     public ResponseDto<? super PostDto> get(Long postId) {
 
         if (!postRepository.existsById(postId)) {
@@ -93,6 +95,7 @@ public class PostService {
         return PatchPostResponseDto.success(new PostDto(post));
     }
 
+    @Cacheable(value = "postsCache", key = "#cond.hashCode() + \" \" + #pageable.hashCode()")
     public ResponseDto<? super List<PostDto>> findPosts(PostSearchCond cond, Pageable pageable) {
 
         List<Post> posts = postQueryRespository.findAll(cond, pageable);
