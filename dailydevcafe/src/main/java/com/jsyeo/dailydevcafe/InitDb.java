@@ -19,42 +19,42 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Profile("dev")
 public class InitDb {
-
-    private final InitService initService;
-
-    @EventListener(ApplicationReadyEvent.class)
-    public void init() {
-        initService.dbInit();
-    }
-
-    @Component
-    @Transactional
-    @RequiredArgsConstructor
-    static class InitService {
-
-        private final EntityManager em;
-        private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-        public void dbInit() {
-            SignUpRequestDto memberDto = new SignUpRequestDto();
-            memberDto.setName("memberA");
-            memberDto.setEmail("test@test.com");
-            memberDto.setNickname("testNickname");
-            memberDto.setPassword(passwordEncoder.encode("Pa$sw0rd"));
-            memberDto.setAgreedPersonal(true);
-
-            Member member = new Member(memberDto);
-            em.persist(member);
-
-            for (int i = 1; i <= 20000; i++) {
-                PublishPostRequestDto postDto = new PublishPostRequestDto();
-                postDto.setTitle("Test Title" + i);
-                postDto.setContent("Publish Post Test" + i);
-                postDto.setCategory("Test Category" + i);
-
-                Post post = new Post(postDto, member);
-                em.persist(post);
-            }
-        }
-    }
+//
+//    private final InitService initService;
+//
+//    @EventListener(ApplicationReadyEvent.class)
+//    public void init() {
+//        initService.dbInit();
+//    }
+//
+//    @Component
+//    @Transactional
+//    @RequiredArgsConstructor
+//    static class InitService {
+//
+//        private final EntityManager em;
+//        private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//
+//        public void dbInit() {
+//            SignUpRequestDto memberDto = new SignUpRequestDto();
+//            memberDto.setName("memberA");
+//            memberDto.setEmail("test@test.com");
+//            memberDto.setNickname("testNickname");
+//            memberDto.setPassword(passwordEncoder.encode("Pa$sw0rd"));
+//            memberDto.setAgreedPersonal(true);
+//
+//            Member member = new Member(memberDto);
+//            em.persist(member);
+//
+//            for (int i = 1; i <= 20000; i++) {
+//                PublishPostRequestDto postDto = new PublishPostRequestDto();
+//                postDto.setTitle("Test Title" + i);
+//                postDto.setContent("Publish Post Test" + i);
+//                postDto.setCategory("Test Category" + i);
+//
+//                Post post = new Post(postDto, member);
+//                em.persist(post);
+//            }
+//        }
+//    }
 }
