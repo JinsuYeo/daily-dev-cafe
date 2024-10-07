@@ -10,8 +10,12 @@ jobs:
   build-docker-image:
     runs-on: ubuntu-latest
     env:
-      working-directory: $GITHUB_WORKSPACE/dailydevcafe
+      working-directory: ./dailydevcafe
     steps:
+    - name: Print GITHUB_WORKSPACE
+      run: |
+        echo $GITHUB_WORKSPACE
+        echo $(ls)
     # Docker 이미지 빌드
     - name: docker image build
       run: |
