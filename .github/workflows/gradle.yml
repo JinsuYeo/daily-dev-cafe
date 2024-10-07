@@ -4,23 +4,17 @@ name: Java CI with Gradle
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-permissions:
-  contents: read
-
+    
 jobs:
   # Spring Boot 애플리케이션을 빌드하여 도커허브에 푸시하는 과정
   build-docker-image:
     runs-on: ubuntu-latest
     env:
-      working-directory: dailydevcafe
+      working-directory: ./dailydevcafe
     steps:
     # Docker 이미지 빌드
     - name: docker image build
       run: |
-        ls -al
         TAG=${{ github.sha }}
         docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/ddc:$TAG .
       working-directory: ${{ env.working-directory }}
@@ -48,6 +42,7 @@ jobs:
       run: |
         git config --global user.name "JinsuYeo"
         git config --global user.email "jsyeo97@naver.com"
+        
     # IaC Private Repo에 이미지 태그 업데이트 (Argo CD 자동 배포)
     - name: Clone IaC Repo and Update Tag
       run: |
