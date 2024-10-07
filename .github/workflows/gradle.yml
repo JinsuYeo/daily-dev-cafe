@@ -14,12 +14,14 @@ jobs:
   # Spring Boot 애플리케이션을 빌드하여 도커허브에 푸시하는 과정
   build-docker-image:
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./dailydevcafe
     steps:
     # Docker 이미지 빌드
     - name: docker image build
       run: |
         TAG=${{ github.sha }}
-        docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/ddc:$TAG -f dailydevcafe/Dockerfile .
+        docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/ddc:$TAG .
 
     # DockerHub 로그인
     - name: docker login
