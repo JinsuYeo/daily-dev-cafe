@@ -11,10 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Print GITHUB_WORKSPACE
-      run: |
-        echo $GITHUB_WORKSPACE
-        echo $(ls)
+    - name: Checkout code
+      uses: actions/checkout@v4
 
     # Docker 이미지 빌드
     - name: docker image build
