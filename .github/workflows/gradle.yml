@@ -16,6 +16,8 @@ jobs:
       run: |
         echo $GITHUB_WORKSPACE
         echo $(ls)
+      working-directory: ${{ env.working-directory }}
+
     # Docker 이미지 빌드
     - name: docker image build
       run: |
