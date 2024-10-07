@@ -20,6 +20,7 @@ jobs:
     # Docker 이미지 빌드
     - name: docker image build
       run: |
+        ls -al
         TAG=${{ github.sha }}
         docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/ddc:$TAG .
       working-directory: ${{ env.working-directory }}
