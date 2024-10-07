@@ -19,23 +19,22 @@ jobs:
     steps:
     # Docker 이미지 빌드
     - name: docker image build
-      working-directory: ${{ env.working-directory }}
       run: |
         TAG=${{ github.sha }}
         docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/ddc:$TAG .
+      working-directory: ${{ env.working-directory }}
 
     # DockerHub 로그인
     - name: docker login
       uses: docker/login-action@v2
-      working-directory: ${{ env.working-directory }}
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     # Docker Hub 이미지 푸시
     - name: docker Hub push
-      working-directory: ${{ env.working-directory }}
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/ddc:$TAG
+      working-directory: ${{ env.working-directory }}
 
     # SSH 설정
     - name: Setup SSH key for accessing IaC repo
