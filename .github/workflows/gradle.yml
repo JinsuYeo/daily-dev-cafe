@@ -19,7 +19,7 @@ jobs:
     - name: docker image build
       run: |
         TAG=${{ github.sha }}
-        docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/ddc:$TAG ./dailydevcafe
+        docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/ddc:$TAG .
 
     # DockerHub 로그인
     - name: docker login
