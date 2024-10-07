@@ -1,0 +1,57 @@
+name: Java CI with Gradle
+
+# 동작 조건 설정 : main 브랜치에 push 혹은 pull request가 발생할 경우 동작한다.
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  # Spring Boot 애플리케이션을 빌드하여 도커허브에 푸시하는 과정
+  build-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+    # Docker 이미지 빌드
+    - name: docker image build
+      run: |
+        TAG=${{ github.sha }}
+        docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/ddc:$TAG .
+
+    # DockerHub 로그인
+    - name: docker login
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    # Docker Hub 이미지 푸시
+    - name: docker Hub push
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/ddc:$TAG
+
+    # SSH 설정
+    - name: Setup SSH key for accessing IaC repo
+      uses: webfactory/ssh-agent@v0.9.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY_IAC }}
+
+    # GitHub 사용자 설정
+    - name: Set Git config
+      run: |
+        git config --global user.name "JinsuYeo"
+        git config --global user.email "jsyeo97@naver.com"
+    # IaC Private Repo에 이미지 태그 업데이트 (Argo CD 자동 배포)
+    - name: Clone IaC Repo and Update Tag
+      run: |
+        TAG=${{ github.sha }}
+        git clone git@github.com:JinsuYeo/ddc-iac.git
+        cd ddc-iac
+          
+        sed -i "s|image: .*ddc:.*$|image: ${{ secrets.DOCKERHUB_USERNAME }}/ddc:${TAG}|g" rollout.yaml
+          
+        git add rollout.yaml
+        git commit -m "Update product image to ${TAG}" || echo "Nothing to commit"
+        git push origin main || echo "Push failed"
