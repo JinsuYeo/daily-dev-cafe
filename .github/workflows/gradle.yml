@@ -9,21 +9,18 @@ jobs:
   # Spring Boot 애플리케이션을 빌드하여 도커허브에 푸시하는 과정
   build-docker-image:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./dailydevcafe
+
     steps:
     - name: Print GITHUB_WORKSPACE
       run: |
         echo $GITHUB_WORKSPACE
         echo $(ls)
-      working-directory: ${{ env.working-directory }}
 
     # Docker 이미지 빌드
     - name: docker image build
       run: |
         TAG=${{ github.sha }}
         docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/ddc:$TAG .
-      working-directory: ${{ env.working-directory }}
 
     # DockerHub 로그인
     - name: docker login
@@ -35,7 +32,6 @@ jobs:
     # Docker Hub 이미지 푸시
     - name: docker Hub push
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/ddc:$TAG
-      working-directory: ${{ env.working-directory }}
 
     # SSH 설정
     - name: Setup SSH key for accessing IaC repo
