@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - DailydevcafeApplicationTests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>DailydevcafeApplicationTests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.jsyeo.dailydevcafe.html">com.jsyeo.dailydevcafe</a> &gt; DailydevcafeApplicationTests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.454s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">contextLoads()</td>
+<td class="success">0.454s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>19:46:21.157 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.jsyeo.dailydevcafe.DailydevcafeApplicationTests]: DailydevcafeApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:46:21.274 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.jsyeo.dailydevcafe.DailydevcafeApplication for test class com.jsyeo.dailydevcafe.DailydevcafeApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.1)
+
+2024-10-06T19:46:21.633+09:00  INFO 95524 --- [    Test worker] c.j.d.DailydevcafeApplicationTests       : Starting DailydevcafeApplicationTests using Java 17.0.2 with PID 95524 (started by root in /Users/yeojinsu/Documents/Development/daily-dev-cafe/daily-dev-cafe/dailydevcafe)
+2024-10-06T19:46:21.635+09:00  INFO 95524 --- [    Test worker] c.j.d.DailydevcafeApplicationTests       : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2024-10-06T19:46:22.629+09:00  INFO 95524 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-06T19:46:22.687+09:00  INFO 95524 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 49 ms. Found 2 JPA repository interfaces.
+2024-10-06T19:46:23.284+09:00  INFO 95524 --- [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'postCache' created in EhcacheManager.
+2024-10-06T19:46:23.297+09:00  INFO 95524 --- [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=urn.X-ehcache.jsr107-default-config,Cache=postCache
+2024-10-06T19:46:23.302+09:00  INFO 95524 --- [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'postsCache' created in EhcacheManager.
+2024-10-06T19:46:23.303+09:00  INFO 95524 --- [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=urn.X-ehcache.jsr107-default-config,Cache=postsCache
+2024-10-06T19:46:23.458+09:00  INFO 95524 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-06T19:46:23.524+09:00  INFO 95524 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-10-06T19:46:23.557+09:00  INFO 95524 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-06T19:46:23.810+09:00  INFO 95524 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-06T19:46:23.841+09:00  INFO 95524 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-06T19:46:24.034+09:00  INFO 95524 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb user=SA
+2024-10-06T19:46:24.035+09:00  INFO 95524 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-10-06T19:46:24.315+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211584314 | took 6ms | statement | connection 1| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+select * from INFORMATION_SCHEMA.SEQUENCES
+select * from INFORMATION_SCHEMA.SEQUENCES;
+2024-10-06T19:46:24.429+09:00  WARN 95524 --- [    Test worker] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.jsyeo.dailydevcafe.domain.FavoritePK
+2024-10-06T19:46:24.429+09:00  WARN 95524 --- [    Test worker] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.jsyeo.dailydevcafe.domain.FavoritePK
+2024-10-06T19:46:25.042+09:00  INFO 95524 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-06T19:46:25.056+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585056 | took 0ms | statement | connection 2| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    drop table if exists comment cascade 
+
+    drop table if exists comment cascade ;
+2024-10-06T19:46:25.056+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585056 | took 0ms | statement | connection 2| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    drop table if exists favorite cascade 
+
+    drop table if exists favorite cascade ;
+2024-10-06T19:46:25.057+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585057 | took 0ms | statement | connection 2| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    drop table if exists member cascade 
+
+    drop table if exists member cascade ;
+2024-10-06T19:46:25.057+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585057 | took 0ms | statement | connection 2| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    drop table if exists post cascade 
+
+    drop table if exists post cascade ;
+2024-10-06T19:46:25.057+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585057 | took 0ms | statement | connection 2| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    drop sequence if exists comment_seq
+
+    drop sequence if exists comment_seq;
+2024-10-06T19:46:25.058+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585058 | took 0ms | statement | connection 2| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    drop sequence if exists member_seq
+
+    drop sequence if exists member_seq;
+2024-10-06T19:46:25.058+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585058 | took 0ms | statement | connection 2| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    drop sequence if exists post_seq
+
+    drop sequence if exists post_seq;
+2024-10-06T19:46:25.064+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585064 | took 1ms | statement | connection 3| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    create sequence comment_seq start with 1 increment by 50
+
+    create sequence comment_seq start with 1 increment by 50;
+2024-10-06T19:46:25.065+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585065 | took 0ms | statement | connection 3| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    create sequence member_seq start with 1 increment by 50
+
+    create sequence member_seq start with 1 increment by 50;
+2024-10-06T19:46:25.066+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585066 | took 0ms | statement | connection 3| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    create sequence post_seq start with 1 increment by 50
+
+    create sequence post_seq start with 1 increment by 50;
+2024-10-06T19:46:25.071+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585071 | took 3ms | statement | connection 3| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    create table comment (
+        comment_date timestamp(6) not null,
+        comment_id bigint not null,
+        member_id bigint,
+        post_id bigint,
+        content TEXT not null,
+        primary key (comment_id)
+    )
+
+    create table comment (
+        comment_date timestamp(6) not null,
+        comment_id bigint not null,
+        member_id bigint,
+        post_id bigint,
+        content TEXT not null,
+        primary key (comment_id)
+    );
+2024-10-06T19:46:25.073+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585073 | took 1ms | statement | connection 3| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    create table favorite (
+        post_id bigint not null,
+        member_id varchar(255) not null,
+        primary key (post_id, member_id)
+    )
+
+    create table favorite (
+        post_id bigint not null,
+        member_id varchar(255) not null,
+        primary key (post_id, member_id)
+    );
+2024-10-06T19:46:25.077+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585077 | took 2ms | statement | connection 3| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    create table member (
+        member_id bigint not null,
+        email varchar(255) unique,
+        name varchar(255),
+        nickname varchar(255) unique,
+        password varchar(255),
+        type varchar(255) check (type in ('APP','GOOGLE','KAKAO','NAVER')),
+        primary key (member_id)
+    )
+
+    create table member (
+        member_id bigint not null,
+        email varchar(255) unique,
+        name varchar(255),
+        nickname varchar(255) unique,
+        password varchar(255),
+        type varchar(255) check (type in ('APP','GOOGLE','KAKAO','NAVER')),
+        primary key (member_id)
+    );
+2024-10-06T19:46:25.078+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585078 | took 0ms | statement | connection 3| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    create table post (
+        comment_count integer not null,
+        favorite_count integer not null,
+        view_count integer not null,
+        member_id bigint,
+        post_date timestamp(6),
+        post_id bigint not null,
+        category varchar(255),
+        content TEXT,
+        title TEXT,
+        primary key (post_id)
+    )
+
+    create table post (
+        comment_count integer not null,
+        favorite_count integer not null,
+        view_count integer not null,
+        member_id bigint,
+        post_date timestamp(6),
+        post_id bigint not null,
+        category varchar(255),
+        content TEXT,
+        title TEXT,
+        primary key (post_id)
+    );
+2024-10-06T19:46:25.083+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585083 | took 3ms | statement | connection 3| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    alter table if exists comment 
+       add constraint FKmrrrpi513ssu63i2783jyiv9m 
+       foreign key (member_id) 
+       references member
+
+    alter table if exists comment 
+       add constraint FKmrrrpi513ssu63i2783jyiv9m 
+       foreign key (member_id) 
+       references member;
+2024-10-06T19:46:25.084+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585084 | took 1ms | statement | connection 3| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    alter table if exists comment 
+       add constraint FKs1slvnkuemjsq2kj4h3vhx7i1 
+       foreign key (post_id) 
+       references post
+
+    alter table if exists comment 
+       add constraint FKs1slvnkuemjsq2kj4h3vhx7i1 
+       foreign key (post_id) 
+       references post;
+2024-10-06T19:46:25.086+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211585086 | took 1ms | statement | connection 3| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+    alter table if exists post 
+       add constraint FK83s99f4kx8oiqm3ro0sasmpww 
+       foreign key (member_id) 
+       references member
+
+    alter table if exists post 
+       add constraint FK83s99f4kx8oiqm3ro0sasmpww 
+       foreign key (member_id) 
+       references member;
+2024-10-06T19:46:25.088+09:00  INFO 95524 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-06T19:46:25.553+09:00  WARN 95524 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-06T19:46:25.709+09:00  INFO 95524 --- [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2024-10-06T19:46:25.913+09:00  INFO 95524 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3bc82aa3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@38769b6c, org.springframework.security.web.context.SecurityContextHolderFilter@cfe7be3, org.springframework.security.web.header.HeaderWriterFilter@bb9bad9, org.springframework.web.filter.CorsFilter@1220969, org.springframework.security.web.authentication.logout.LogoutFilter@1b81a499, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@5a4a8a33, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@4a0e3bd, com.jsyeo.dailydevcafe.security.JwtAuthenticationalFilter@7b9b244e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5a349644, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@42b6acc2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4d57fc11, org.springframework.security.web.session.SessionManagementFilter@34fe89a5, org.springframework.security.web.access.ExceptionTranslationFilter@7a5b561b, org.springframework.security.web.access.intercept.AuthorizationFilter@40f7fb45]
+2024-10-06T19:46:26.235+09:00  INFO 95524 --- [    Test worker] c.j.d.DailydevcafeApplicationTests       : Started DailydevcafeApplicationTests in 4.824 seconds (process running for 5.914)
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.5</a> at 2024. 10. 6. 오후 7:46:28</p>
+</div>
+</div>
+</body>
+</html>

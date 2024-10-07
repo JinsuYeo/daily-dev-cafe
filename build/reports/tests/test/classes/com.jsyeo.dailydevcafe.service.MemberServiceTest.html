@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - MemberServiceTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>MemberServiceTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.jsyeo.dailydevcafe.service.html">com.jsyeo.dailydevcafe.service</a> &gt; MemberServiceTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">2</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.770s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">로그인()</td>
+<td class="success">0.546s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">회원가입()</td>
+<td class="success">0.224s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2024-10-06T19:46:26.706+09:00  INFO 95524 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.jsyeo.dailydevcafe.service.MemberServiceTest]: MemberServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-10-06T19:46:26.717+09:00  INFO 95524 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.jsyeo.dailydevcafe.DailydevcafeApplication for test class com.jsyeo.dailydevcafe.service.MemberServiceTest
+2024-10-06T19:46:26.939+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211586939 | took 0ms | statement | connection 4| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.email=?
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.email='test@test.com';
+2024-10-06T19:46:26.945+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211586945 | took 0ms | statement | connection 4| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.nickname=?
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.nickname='test';
+2024-10-06T19:46:26.956+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211586956 | took 0ms | statement | connection 4| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+select next value for member_seq
+select next value for member_seq;
+2024-10-06T19:46:26.993+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211586993 | took 0ms | statement | connection 4| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+insert into member (email,name,nickname,password,type,member_id) values (?,?,?,?,?,?)
+insert into member (email,name,nickname,password,type,member_id) values ('test@test.com','memberA','test','$2a$10$6scDDD9gCufPQv08M07AhuNuN0SJWxEibrQUSRP2KXYbgVpWy4//a','APP',1);
+2024-10-06T19:46:26.995+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211586995 | took 0ms | statement | connection 4| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.email=?
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.email='test@test.com';
+2024-10-06T19:46:27.187+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211587187 | took 0ms | statement | connection 4| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.email=?
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.email='test2@test.com';
+2024-10-06T19:46:27.189+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211587189 | took 0ms | statement | connection 4| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.email=?
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.email='test@test.com';
+2024-10-06T19:46:27.265+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211587265 | took 0ms | rollback | connection 4| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+;
+2024-10-06T19:46:27.346+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211587346 | took 0ms | statement | connection 5| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.email=?
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.email='test@test.com';
+2024-10-06T19:46:27.348+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211587348 | took 0ms | statement | connection 5| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.nickname=?
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.nickname='test';
+2024-10-06T19:46:27.348+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211587348 | took 0ms | statement | connection 5| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+select next value for member_seq
+select next value for member_seq;
+2024-10-06T19:46:27.417+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211587417 | took 0ms | statement | connection 5| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+insert into member (email,name,nickname,password,type,member_id) values (?,?,?,?,?,?)
+insert into member (email,name,nickname,password,type,member_id) values ('test@test.com','memberA','test','$2a$10$CbM2sNnBFYDgIjRO7967G.r4/PbZSTFe27aaf1ZIffKhQ2pC9q7XW','APP',2);
+2024-10-06T19:46:27.418+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211587418 | took 0ms | statement | connection 5| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.email=?
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.email='test2@test.com';
+2024-10-06T19:46:27.420+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211587420 | took 0ms | statement | connection 5| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.nickname=?
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.nickname='test';
+2024-10-06T19:46:27.489+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211587489 | took 0ms | statement | connection 5| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.email=?
+select m1_0.member_id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.type from member m1_0 where m1_0.email='test@test.com';
+2024-10-06T19:46:27.491+09:00  INFO 95524 --- [    Test worker] p6spy                                    : #1728211587491 | took 0ms | rollback | connection 5| url jdbc:h2:mem:9cb1ae9e-0c18-4196-8437-6987b950b6bb
+
+;
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.5</a> at 2024. 10. 6. 오후 7:46:28</p>
+</div>
+</div>
+</body>
+</html>
