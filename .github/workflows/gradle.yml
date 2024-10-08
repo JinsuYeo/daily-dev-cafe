@@ -1,12 +1,12 @@
 name: Java CI with Gradle
 
-# 동작 조건 설정 : main 브랜치에 push 혹은 pull request가 발생할 경우 동작한다.
+# 동작 조건 설정 : main 브랜치에 push request가 발생할 경우 동작한다.
 on:
   push:
     branches: [ "main" ]
     
 jobs:
-  # Spring Boot 애플리케이션을 image로 빌드한 후 Docker Hub에 Push, IaC Repository의 rollout.yaml 파일에서 사용하는 이미지의 태그를 새로 Push한 이미지의 태그로 변경
+  # Spring Boot 애플리케이션을 image로 빌드한 후 Docker Hub에 Push, Manifest Repository의 rollout.yaml 파일에서 사용하는 이미지의 태그를 새로 Push한 이미지의 태그로 변경
   CI:
     runs-on: ubuntu-latest
 
